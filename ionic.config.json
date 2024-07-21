@@ -1,0 +1,7 @@
+{
+  "name": "DreamsApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
