@@ -1,0 +1,55 @@
+@charset "UTF-8";
+/* Aquí puedes agregar tus estilos CSS */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px;
+  margin: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.total-cost {
+  text-align: right;
+  font-size: 1.5em;
+  /* Aumenta el tamaño del texto */
+  font-weight: bold;
+  /* Opcional: hace el texto más grueso */
+}
+
+.custom-button {
+  --background: transparent;
+  /* Elimina el fondo azul */
+  --color: rgb(48, 128, 226);
+  /* Cambia el color del icono */
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  font-size: 1.5em;
+  /* Aumenta el tamaño del botón */
+}
+
+.custom-button ion-icon {
+  font-size: 1.5em;
+  /* Aumenta el tamaño del icono */
+}
+
+/*# sourceMappingURL=lista-pedido.page.css.map */

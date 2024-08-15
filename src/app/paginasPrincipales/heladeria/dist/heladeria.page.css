@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/* Asegúrate de que el cuerpo y el contenido llenen toda la pantalla */
+html, body, ion-app, ion-content {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ion-header {
+  height: auto;
+  /* Ajusta la altura del header si es necesario */
+}
+
+.header-image {
+  width: 100%;
+  /* Ajusta el ancho de la imagen del header */
+  height: auto;
+  /* Mantiene la proporción de la imagen */
+  display: block;
+}
+
+ion-header ion-title {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.image-container {
+  height: calc(100vh - var(--ion-safe-area-top) - var(--ion-toolbar-height) - 160px);
+  /* Ocupa toda la altura de la pantalla menos el header y espacio para los botones */
+  width: 100%;
+  overflow: hidden;
+  /* Evita que el contenido se desborde */
+}
+
+.content-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Asegura que la imagen cubra todo el contenedor sin deformarse */
+  display: block;
+}
+
+.button-container {
+  background-color: blue;
+  padding: 5px 5px;
+  /* Añade espacio alrededor de los botones */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  /* Espacio entre los botones */
+}
+
+ion-button {
+  width: 80%;
+  /* Ajusta el ancho del botón */
+  font-size: 20px;
+  /* Aumenta el tamaño de la fuente */
+  padding: 20px;
+  /* Aumenta el espaciado interno del botón para hacerlo más alto */
+  border-radius: 10px;
+  /* Esquinas redondeadas del botón */
+}
+
+/*# sourceMappingURL=heladeria.page.css.map */

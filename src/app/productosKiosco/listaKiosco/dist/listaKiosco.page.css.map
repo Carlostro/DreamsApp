@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["listaKiosco.page.scss"],"sourcesContent":[".item-price {\r\n  /* Alinea el precio a la derecha */\r\n  text-align: end;\r\n}\r\n"],"file":"listaKiosco.page.css"}

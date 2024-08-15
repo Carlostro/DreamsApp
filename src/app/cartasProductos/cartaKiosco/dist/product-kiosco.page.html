@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Seleccione los Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Seleccione los Productos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-button [routerLink]="['/bebidas', { title: 'Bebidas' }]">
+    <img src="assets/cheers-toast.gif" class="button-image"/>
+  </ion-button>
+  <ion-button [routerLink]="['/caramelos', { title: 'Caramelos' }]">
+    <img src="assets/granizado.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button [routerLink]="['/golosinas', { title: 'Golosinas' }]">
+    <img src="assets/refrescos.jpg" class="button-image"/>
+  </ion-button>
+  <ion-button [routerLink]="['/polos', { title: 'Polos' }]">
+    <img src="assets/polos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button [routerLink]="['/frutos-secos', { title: 'Frutos Secos' }]">
+    <img src="assets/copaHelado.jpg" class="button-image"/>
+  </ion-button>
+  <ion-button [routerLink]="['/snacks', { title: 'Snacks' }]">
+    <img src="assets/ginebras.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button [routerLink]="['/galletas', { title: 'Galletas' }]">
+    <img src="assets/cubatas.jpeg" class="button-image"/>
+  </ion-button>
+
+  <ion-button [routerLink]="['/juguetes', { title: 'Juguetes' }]">
+    <img src="assets/zumos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button [routerLink]="['/prensa', { title: 'Prensa' }]">
+    <img src="assets/vinos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button [routerLink]="['/bolleria', { title: 'Bolleria' }]">
+    <img src="assets/bolleria.jpg" class="button-image"/>
+
+  </ion-button>
+
+</ion-content>

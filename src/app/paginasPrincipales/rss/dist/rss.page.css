@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/* Estilos para el ion-header */
+ion-header {
+  --background: transparent;
+}
+
+ion-toolbar {
+  --padding-start: 0;
+  --padding-end: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  overflow: hidden;
+  perspective: 1000px;
+  /* Añade perspectiva para el efecto 3D */
+}
+
+/* Animación de giro en el eje X para el texto */
+.flip-text {
+  color: #007bff;
+  font-size: 24px;
+  text-align: center;
+  display: inline-block;
+  animation: flip 3s infinite;
+  transform-style: preserve-3d;
+  /* Mantiene el estilo 3D */
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+
+.header-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+ion-header ion-toolbar {
+  padding: 0;
+}
+
+ion-header ion-title {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.image-container {
+  position: relative;
+  text-align: center;
+}
+
+.content-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  /* Ajusta la imagen para que cubra el contenedor */
+  display: block;
+  /* Elimina el margen blanco alrededor de la imagen */
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  /* Añade margen superior para bajar los iconos más */
+  padding: 20px;
+  /* Añade espacio alrededor del contenedor de iconos */
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Fondo blanco con transparencia */
+  border-radius: 8px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  /* Aumenta el espacio entre iconos */
+}
+
+.social-icon ion-icon {
+  margin-right: 15px;
+  /* Espacio entre el icono y el texto */
+  font-size: 40px;
+  /* Aumenta el tamaño del icono */
+}
+
+.social-icon a {
+  text-decoration: none;
+  color: #000;
+  /* Cambia el color según tus necesidades */
+  font-size: 20px;
+  /* Aumenta el tamaño del texto */
+}
+
+/*# sourceMappingURL=rss.page.css.map */
