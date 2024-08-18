@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Lista de Pedido</ion-title>
+    <ion-buttons slot="end">
+      <ion-label>Mesa: {{ code }}</ion-label>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -34,11 +37,11 @@
 </ion-content>
 <ion-footer *ngIf="orderList.length > 0">
   <ion-toolbar>
-    <ion-button expand="block" [routerLink]="['/product-heladeria']">
+    <ion-button expand="block" [routerLink]="['/', code, 'product-heladeria']">
       <ion-icon name="add-circle-outline" slot="start"></ion-icon>
       Seguir Comprando
     </ion-button>
-    <ion-button expand="block" (click)="printOrder()">
+    <ion-button  [disabled]="!isCodeValid" expand="block" (click)="printOrder()">
       <ion-icon name="print-outline" slot="start"></ion-icon>
       Enviar Pedido
     </ion-button>

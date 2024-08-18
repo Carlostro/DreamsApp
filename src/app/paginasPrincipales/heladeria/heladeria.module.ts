@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeladeriaPage } from './heladeria.page';
 import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
-
+import { NavigationButtonsModule } from 'src/app/navigation-buttons/navigation-buttons.module';
 import { HeladeriaPageRoutingModule } from './heladeria-routing.module';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { HeladeriaPageRoutingModule } from './heladeria-routing.module';
     FormsModule,
     IonicModule,
     ExploreContainerComponentModule,
-    HeladeriaPageRoutingModule
+    HeladeriaPageRoutingModule,
+    NavigationButtonsModule
   ],
   declarations: [HeladeriaPage]
 })

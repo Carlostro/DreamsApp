@@ -9,10 +9,16 @@ import { ActivatedRoute, Router,NavigationEnd } from '@angular/router';
 export class ProductHeladeriaPage implements OnInit {
   pageTitle: string = '';
   cartItems = 0;
+  code: string | null = null;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    // Suscríbete a los cambios en los parámetros de la ruta
+    this.route.paramMap.subscribe(params => {
+    this.code = params.get('code'); });
+
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.updateTitle();

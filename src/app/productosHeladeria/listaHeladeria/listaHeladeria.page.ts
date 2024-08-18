@@ -12,10 +12,16 @@ export class ListaHeladeriaPage implements OnInit {
   data: Product[] = [];
   cartItems = 0;
   pageTitle: string = '';
+  code: string | null = null; // Código de la mesa
 
   constructor(private orderService: OrderService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+      // Suscríbete a los cambios en los parámetros de la ruta
+      this.route.paramMap.subscribe(params => {
+      this.code = params.get('code');
+      });
+
     // Recuperar el nombre del producto del almacenamiento local
     const storedProductName = localStorage.getItem('selectedProduct');
     this.pageTitle = storedProductName ? storedProductName : 'Producto Desconocido';

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { KioscoPage } from './kiosco.page';
 import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
-
+import { NavigationButtonsModule } from 'src/app/navigation-buttons/navigation-buttons.module';
 import { KioscoPageRoutingModule } from './kiosco-routing.module';
 
 
@@ -15,7 +15,8 @@ import { KioscoPageRoutingModule } from './kiosco-routing.module';
     FormsModule,
     IonicModule,
     ExploreContainerComponentModule,
-    KioscoPageRoutingModule
+    KioscoPageRoutingModule,
+    NavigationButtonsModule
   ],
   declarations: [KioscoPage]
 })

@@ -21,13 +21,13 @@
     </ion-item>
   </ion-list>
 
-  <ion-button [routerLink]="['/product-heladeria']" expand="block">Volver a la Carta</ion-button>
+  <ion-button [routerLink]="['/', code, 'product-heladeria']"  expand="block">Volver a la Carta</ion-button>
 </ion-content>
 
 <!-- Botón en la parte inferior para abrir la lista de productos añadidos -->
 <ion-footer *ngIf="cartItems > 0">
   <ion-toolbar>
-    <ion-button expand="block" [routerLink]="['/lista-pedido']">
+    <ion-button expand="block" [routerLink]="['/', code, 'lista-pedido']">
       <ion-icon name="cart-outline" slot="start"></ion-icon>
       Ver Pedido ({{ cartItems }})
     </ion-button>

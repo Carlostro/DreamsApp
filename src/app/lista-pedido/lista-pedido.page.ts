@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { Product } from '../models/product.model';
 import { HttpClient } from '@angular/common/http';
-// import ConectorPluginV3 from '../ConectorPluginV3';
+import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import ConectorPluginV3 from '../ConectorPluginV3';
 
-// const conector = new ConectorPluginV3();
+const conector = new ConectorPluginV3();
 
 @Component({
   selector: 'app-lista-pedido',
@@ -15,11 +17,48 @@ import { HttpClient } from '@angular/common/http';
 export class ListaPedidoPage implements OnInit {
   orderList: Product[] = [];
   totalCost: number = 0;
+  code: string | null = null;
+  isCodeValid: boolean = true;
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {
+    // Suscríbete a los cambios en los parámetros de la ruta
+    this.route.paramMap.subscribe(params => {
+    this.code = params.get('code');
+    this.compareCodes();
+    });
+
     this.loadOrderList();
+  }
+
+  getSavedCode(): string | null {
+    return localStorage.getItem('codigoMesaGuardado');
+  }
+
+  async compareCodes(): Promise<void> {
+    const savedCode = this.getSavedCode();
+    if (this.code !== savedCode) {
+      this.isCodeValid = false;
+      await this.showAlert();
+    } else {
+      this.isCodeValid = true;
+    }
+  }
+
+  async showAlert() {
+    const alert = await this.alertController.create({
+      header: 'Código Modificado',
+      message: 'El código de la URL ha sido modificado, cierre la app y vuelva a empezar. 😢',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   loadOrderList(): void {
@@ -48,56 +87,47 @@ export class ListaPedidoPage implements OnInit {
     this.loadOrderList();
   }
   printOrder() {
-      const printContent = this.generatePrintContent();
-      fetch('http://<192.168.1.41>:3000/api/print', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          content: printContent // Cambia esto por el contenido que quieras imprimir
-        })
-      })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
-  }
-  generatePrintContent(): string {
-    let content = `
-      <html>
-      <head>
+    const codigoMesa = this.code; // Código de la mesa recogido de la URL
+    const fechaHoy = new Date();
+    const fecha = fechaHoy.toLocaleDateString();
+    const hora = fechaHoy.toLocaleTimeString();
 
-        <style>
-          body { font-family: Arial, sans-serif; }
-          .product { margin-bottom: 10px; }
-          .product-name { font-weight: bold; }
-          .product-details { margin-left: 20px; }
-          .total-cost { text-align: right; font-size: 1.2em; font-weight: bold; margin-top: 20px; }
-          .h2 { font-size: 1.5em; font-weight: bold; margin: 0; padding: 0; text-align: right; }
-        </style>
-      </head>
-      <body>
-        <h2 class="h2">Lista de Pedido</h2>
-    `;
+    conector
+      .Iniciar()
+      .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+      //.CargarImagenLocalEImprimir("C:/Users/carlo/Desktop/Dreams/DreamsApp/src/assets/logo ticket.png", ConectorPluginV3.TAMAÑO_IMAGEN_NORMAL, 200)
+
+      .EscribirTexto(`DreamsApp           Mesa: ${codigoMesa}\n`)
+      .EscribirTexto(`Fecha: ${fecha} Hora: ${hora}\n`)
+      .EscribirTexto("----------------------------------------\n")
+      .EscribirTexto("Unid  Descripcion       Precio   Importe\n")
+      .EscribirTexto("----------------------------------------\n");
+
+    let totalLista = 0;
 
     this.orderList.forEach(product => {
-      content += `
-        <div class="product">
-          <div class="product-name">${product.Cantidad} x ${product.Nombre}</div>
-          <div class="product-details">
-            <span>Precio: ${product.Precio.toFixed(2)} €</span>
-            <span style="float: right; font-size: 1.2em; font-weight: bold;">${(product.Precio * product.Cantidad).toFixed(2)} €</span>
-          </div>
-        </div>
-      `;
+      const totalProducto = product.Cantidad * product.Precio;
+      totalLista += totalProducto;
+
+      // Formatear la línea para que el nombre del producto comience desde el mismo punto
+      const cantidad = product.Cantidad.toString().padEnd(3, ' ');
+      const nombre = product.Nombre.padEnd(20, ' ');
+      const precio = product.Precio.toFixed(2).padStart(1, ' ');
+      const importe = totalProducto.toFixed(2).padStart(8, ' ');
+
+      conector.EscribirTexto(
+        `${cantidad}${nombre}${precio}${importe}\n`
+      );
     });
 
-    content += `
-      <h2 style="text-align: right; font-size: 1.5em; font-weight: bold;">Total: ${this.totalCost.toFixed(2)} €</h2>
-    </body>
-    </html>
-    `;
+    conector.EscribirTexto("----------------------------------------\n");
+    conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA);
+    conector.EstablecerTamañoFuente(2,2);
+    conector.EscribirTexto(`\nTotal: ${totalLista.toFixed(2)}\n`);
 
-    return content;
-  }
+    conector.imprimirEn("PrintApp");
+    conector.CorteParcial();
 }
+}
+
+

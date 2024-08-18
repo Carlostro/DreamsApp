@@ -7,16 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { CodigoMesaGuard } from './guards/codigo-mesa.guard';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(),AppRoutingModule, HttpClientModule,FormsModule],
-
-  providers: [{ provide: RouteReuseStrategy,
-    useClass: IonicRouteStrategy }],
-
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, CodigoMesaGuard],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}
+
