@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model'; // Importar la interfaz Product
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listaheladeria',
@@ -13,8 +14,13 @@ export class ListaHeladeriaPage implements OnInit {
   cartItems = 0;
   pageTitle: string = '';
   code: string | null = null; // Código de la mesa
+  allowedTablesForDetails: string[] = ['Cubatas','Helados Personalizados', 'Cafes']; // Lista de tablas permitidas
+  selectedTable: string = '';
 
-  constructor(private orderService: OrderService, private route: ActivatedRoute) {}
+  constructor(
+    private orderService: OrderService,
+     private route: ActivatedRoute,
+     private router: Router) {}
 
   ngOnInit() {
       // Suscríbete a los cambios en los parámetros de la ruta
@@ -30,6 +36,7 @@ export class ListaHeladeriaPage implements OnInit {
     this.route.params.subscribe(params => {
       if (params['title']) {
         this.pageTitle = params['title'];
+        this.selectedTable = this.pageTitle;
         this.fetchProductsByTitle(this.pageTitle);
       }
     });
@@ -56,4 +63,16 @@ export class ListaHeladeriaPage implements OnInit {
       this.cartItems = orderList.reduce((total, product) => total + (product.Cantidad || 0), 0);
     });
   }
+
+    // Método para verificar si la tabla está permitida
+    isTableAllowedForDetails(): boolean {
+      return this.allowedTablesForDetails.includes(this.selectedTable);
+    }
+
+
+  viewProductDetail(item: Product): void {
+    if (this.isTableAllowedForDetails()) {
+      this.router.navigate([`/${this.code}/product-detail`, this.pageTitle, item.Id]);
+    }
+}
 }

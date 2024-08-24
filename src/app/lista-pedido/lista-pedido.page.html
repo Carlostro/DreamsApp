@@ -10,17 +10,28 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let product of orderList">
-      <ion-label>
+      <ion-label class="product-label">
         <h2>{{ product.Cantidad }}  X  {{ product.Nombre }}</h2>
-        <p>Precio por unidad: {{ product.Precio }}</p>
-
+        <p>Precio por unidad: {{ product.Precio }}€</p>
+        <!-- Mostrar complementos si existen -->
+        <ng-container *ngIf="product.Complementos && product.Complementos.length > 0">
+          <div *ngFor="let complemento of product.Complementos; let i = index">
+            <span>{{ complemento.Nombre }}</span>
+            <br *ngIf="i < product.Complementos.length - 1">
+          </div>
+        </ng-container>
       </ion-label>
-      <ion-button class="custom-button" (click)="decrementQuantity(product)">
-        <ion-icon name="remove-circle-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="custom-button" (click)="incrementQuantity(product)">
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
+      <div class="price-and-buttons">
+        <p class="total-price">{{ product.Cantidad * product.PrecioTotal | number:'1.2-2' }} €</p> <!-- Precio total por producto -->
+        <div class="buttons">
+          <ion-button class="custom-button" (click)="decrementQuantity(product)">
+            <ion-icon name="remove-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="custom-button" (click)="incrementQuantity(product)">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
     </ion-item>
   </ion-list>
 
@@ -34,6 +45,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
 <ion-footer *ngIf="orderList.length > 0">
   <ion-toolbar>

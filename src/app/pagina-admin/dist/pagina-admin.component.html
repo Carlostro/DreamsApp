@@ -1,0 +1,44 @@
+<div class="admin-container">
+  <h2 class="header">Página de Administración</h2>
+
+  <div>
+    <h3>Tablas de Productos</h3>
+    <ul class="table-list">
+      <li *ngFor="let table of tables" (click)="onSelectTable(table)">
+        {{ table }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="selectedTable">
+    <h3>Datos de la Tabla: {{ selectedTable }}</h3>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th *ngFor="let key of tableData[0] | keyvalue">{{ key.key }}</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableData">
+          <td *ngFor="let key of row | keyvalue">{{ key.value }}</td>
+          <td>
+            <button [ngClass]="{'active-edit': editingRow === row}" (click)="onEdit(row)">Editar</button>
+            <button (click)="onDelete(row)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="add-button" (click)="onAdd()">Añadir Producto</button>
+  </div>
+
+  <div *ngIf="editingRow">
+    <form [formGroup]="editForm" (ngSubmit)="onSaveEdit()">
+      <div *ngFor="let key of getKeys(editingRow)">
+        <label [for]="key">{{ key }}</label>
+        <input [id]="key" [formControlName]="key" />
+      </div>
+      <button type="submit">Guardar</button>
+      <button type="button" (click)="onCancelEdit()">Cancelar</button>
+    </form>
+  </div>

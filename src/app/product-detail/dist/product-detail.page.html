@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true">
+  <ion-img [src]="product?.Imagen" class="product-img"></ion-img>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <span class="product-name">{{ product?.Nombre }}</span> <span class="product-price">{{ product?.Precio + "€" }}</span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ product?.Descripcion }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de productos complementarios -->
+  <ion-list *ngIf="complementos.length > 0">
+    <ion-list-header class="complementos-header">Elige con que lo quieres combinar</ion-list-header>
+    <ion-item *ngFor="let complemento of complementos" (click)="selectComplemento(complemento)">
+      <ion-label>
+        <h2>
+          {{ complemento.Nombre }}
+          <span *ngIf="tableName === 'Cafes'" style="margin-left: 10px;"> Precio: {{ complemento.Precio }}€</span>
+        </h2>
+      </ion-label>
+      <ion-checkbox slot="start" [checked]="isComplementoSelected(complemento)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- Botón en la parte inferior para abrir la lista de productos añadidos y volver a la carta -->
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-container">
+      <ion-button (click)="addToOrder()">Añadir a Pedido</ion-button>
+      <ion-button (click)="goBack()">Volver</ion-button>
+    </div>
+    <ion-button *ngIf="cartItems > 0" expand="block" [routerLink]="['/', code, 'lista-pedido']">
+      Ver Pedido ({{ cartItems }})
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

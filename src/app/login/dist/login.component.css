@@ -1,0 +1,43 @@
+/* login.component.css */
+.login-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container h2 {
+  text-align: center;
+}
+
+.login-container div {
+  margin-bottom: 1em;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.5em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+/*# sourceMappingURL=login.component.css.map */

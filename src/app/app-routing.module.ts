@@ -1,13 +1,28 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CodigoMesaGuard } from './guards/codigo-mesa.guard';
-
+import { LoginComponent } from './login/login.component';
+import { PaginaAdminComponent } from './pagina-admin/pagina-admin.component';
 const routes: Routes = [
+
 
   {
     path: '',
     redirectTo: ':code/heladeria',
     pathMatch: 'full'
+  },
+  {
+    path: 'administrador', // Ruta para la página de login
+    component: LoginComponent
+  },
+  {
+    path: 'admin', // Ruta para la página de administración
+    component: PaginaAdminComponent
+  },
+
+  {
+    path: ':code/product-detail/:table/:id',
+    loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
   //Paginas principales enrutadas con el codigo de mesa
   {
@@ -70,6 +85,10 @@ const routes: Routes = [
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
+  path: ':code/helados',
+  loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
     path: ':code/granizados',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
@@ -124,6 +143,10 @@ const routes: Routes = [
   {
     path: ':code/prensa',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
+  },
+  {
+    path: 'product-detail',
+    loadChildren: () => import('./product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
   }
 ];
 

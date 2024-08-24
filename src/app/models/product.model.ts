@@ -6,4 +6,8 @@ export interface Product {
   Precio: number;
   Cantidad: number;
   Imagen: string;
+  Descripcion: string;
+  Ncomplementos: number;
+  Complementos?: any[];
+  PrecioTotal: number;
 }

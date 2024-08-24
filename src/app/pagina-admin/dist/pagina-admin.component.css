@@ -1,0 +1,118 @@
+@charset "UTF-8";
+.admin-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+.table-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.table-list li {
+  padding: 10px;
+  background-color: #f4f4f4;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+.table-list li:hover {
+  background-color: #e0e0e0;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #f4f4f4;
+}
+
+.product-table td {
+  background-color: #fff;
+}
+
+.product-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.product-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button.active-edit {
+  background-color: #ffcc00;
+  /* Color de fondo para el botón de edición activo */
+  color: #fff;
+  /* Color del texto para el botón de edición activo */
+}
+
+.add-button {
+  margin-top: 20px;
+  background-color: #28a745;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+.edit-form {
+  margin-top: 20px;
+}
+
+.edit-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form label {
+  margin-bottom: 5px;
+}
+
+.edit-form input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/*# sourceMappingURL=pagina-admin.component.css.map */

@@ -25,7 +25,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-
 .total-cost {
   text-align: right;
   font-size: 1.5em; /* Aumenta el tamaño del texto */
@@ -44,4 +43,24 @@ button:hover {
 
 .custom-button ion-icon {
   font-size: 1.5em; /* Aumenta el tamaño del icono */
+}
+
+.price-and-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.total-price {
+  margin-bottom: 8px; /* Espacio entre el precio total y los botones */
+  font-size: 1.2em; /* Aumenta el tamaño del texto */
+  font-weight: bold; /* Pone el texto en negrita */
+}
+
+.buttons {
+  display: flex;
+  gap: 8px; /* Espacio entre los botones */
+}
+.product-label {
+  margin-top: -4px; /* Ajusta el margen superior para subir la parte izquierda */
 }

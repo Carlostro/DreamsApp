@@ -46,6 +46,9 @@ export class ProductHeladeriaPage implements OnInit {
       case 'copas-helado':
         this.pageTitle = 'Copas de Helado';
         break;
+      case 'helados':
+          this.pageTitle = 'Helados Personalizados';
+          break;
       case 'ginebras':
         this.pageTitle = 'Ginebras';
         break;

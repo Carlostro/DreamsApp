@@ -22,7 +22,7 @@ ion-header ion-title {
 }
 
 .image-container {
-  height: calc(100vh - var(--ion-safe-area-top) - var(--ion-toolbar-height) - 160px); /* Ocupa toda la altura de la pantalla menos el header y espacio para los botones */
+  height: calc(100vh - var(--ion-safe-area-top) - var(--ion-toolbar-height) - 200px); /* Reducir la altura para dejar más espacio para los botones */
   width: 100%;
   overflow: hidden; /* Evita que el contenido se desborde */
 }
@@ -36,11 +36,11 @@ ion-header ion-title {
 
 .button-container {
   background-color: blue;
-  padding: 5px 5px; /* Añade espacio alrededor de los botones */
+  padding: 2px 5px; /* Añade espacio alrededor de los botones */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Espacio entre los botones */
+  gap: -15px; /* Espacio entre los botones */
 }
 
 ion-button {

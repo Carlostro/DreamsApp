@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.0",
+    "@ionic/angular-toolkit": "^11.0.1",
     "typescript": "^5.4.0"
   }
 }

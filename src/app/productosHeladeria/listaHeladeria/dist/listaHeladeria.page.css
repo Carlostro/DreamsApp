@@ -1,0 +1,54 @@
+@charset "UTF-8";
+.item-img {
+  width: 100px;
+  height: 100px;
+  margin-right: 1px;
+}
+
+.item-label {
+  font-weight: bold;
+  font-size: 1.1em;
+  /* Aumenta el tamaño en un punto */
+}
+
+.item-description {
+  font-weight: normal;
+  /* Asegura que la descripción no esté en negrita */
+  font-size: 1em;
+  /* Tamaño normal para la descripción */
+  display: block;
+  /* Asegura que ocupe toda la línea */
+  width: 100%;
+  /* Ocupa todo el ancho disponible */
+}
+
+.item-price-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.item-price {
+  font-size: 1.2em;
+  /* Tamaño normal para el precio */
+  font-weight: normal;
+  /* Asegura que el precio no esté en negrita */
+  margin-bottom: 5px;
+  /* Espacio entre el precio y el botón */
+  margin-right: 5px;
+}
+
+.increment-button {
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+/*# sourceMappingURL=listaHeladeria.page.css.map */

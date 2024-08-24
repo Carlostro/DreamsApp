@@ -73,9 +73,9 @@ ion-header ion-title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
-  /* Añade margen superior para bajar los iconos más */
-  padding: 20px;
+  margin-top: 1px;
+  /* Reduce el margen superior para subir los iconos */
+  padding: 0px;
   /* Añade espacio alrededor del contenedor de iconos */
   background-color: rgba(255, 255, 255, 0.8);
   /* Fondo blanco con transparencia */
@@ -85,7 +85,7 @@ ion-header ion-title {
 .social-icon {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   /* Aumenta el espacio entre iconos */
 }
 
