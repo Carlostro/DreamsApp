@@ -10,4 +10,5 @@ export interface Product {
   Ncomplementos: number;
   Complementos?: any[];
   PrecioTotal: number;
+  Activo: number;
 }

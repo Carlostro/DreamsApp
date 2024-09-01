@@ -3,21 +3,24 @@
   --padding-end: 0;
   --padding-top: 0;
   --padding-bottom: 0;
-  --background: transparent; /* Elimina el fondo */
-  --box-shadow: none; /* Elimina cualquier sombra */
-  --border-width: 0; /* Elimina cualquier borde */
-  display: inline-flex;
+  --background: black; /* Color de fondo */
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;  /* Ajusta el ancho del botón según se necesite */
-  height: 100px; /* Ajusta la altura del botón según se necesite */
+  width: auto;  /* Ajusta el ancho */
+  height: auto; /* Ajusta la altura*/
 }
 
 .button-image {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Ajusta la imagen para cubrir todo el botón sin distorsión */
-  border-radius: 8px; /* Ajusta el radio del borde si es necesario */
+  border-radius: 15px; /* Ajusta el radio del borde */
 }
 
-
+.centered-title {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.5em;
+}

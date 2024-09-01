@@ -37,6 +37,7 @@
   margin-bottom: 5px;
   /* Espacio entre el precio y el botón */
   margin-right: 5px;
+  margin-left: 5px;
 }
 
 .increment-button {
@@ -49,6 +50,27 @@
   --padding-end: 0;
   --padding-top: 0;
   --padding-bottom: 0;
+}
+
+ion-header {
+  --background: none;
+  /* Asegúrate de que no haya un fondo predeterminado */
+}
+
+.custom-header {
+  background: linear-gradient(to right, #ffecd2, #fcb69f);
+  /* Color de fondo difuminado */
+  --ion-background-color: transparent;
+  /* Asegúrate de que el fondo sea transparente */
+}
+
+.centered-title {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #333;
+  /* Color del texto */
 }
 
 /*# sourceMappingURL=listaHeladeria.page.css.map */

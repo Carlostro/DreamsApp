@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const port = 3000;
 
-// Configurar CORS
+// Habilitar CORS
 app.use(
   cors({
      origin: 'http://localhost:8100'
@@ -36,6 +36,18 @@ app.get("/api/data/:table", (req, res) => {
   const { table } = req.params;
   db.query(`SELECT * FROM ??`, [table], (err, results) => {
     if (err) {
+      res.status(500).json({ error: "Error al ejecutar la consulta" });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Ruta para obtener datos de la tabla promosheladeria donde activate es 1
+app.get("/api/promosheladeria/active", (req,res) => {
+  db.query(`SELECT * FROM PromosHeladeria WHERE Activo = 1`, (err, results) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
       res.status(500).json({ error: "Error al ejecutar la consulta" });
       return;
     }
@@ -137,8 +149,11 @@ app.get("/api/complementos", (req, res) => {
     query = `SELECT Nombre,Precio FROM Complementos_Cafe `;
   } else if (table === 'Bolleria') {
     query = `SELECT Nombre,Precio FROM Complementos_Bolleria `;
+  } else if (table === 'Ginebras') {
+    query = `SELECT * FROM Complementos_Gins `;
+  } else if (table === 'Infusiones') {
+    query = `SELECT * FROM Complementos_Infusiones `;
   }
-
   db.query(query, [table], (err, results) => {
     if (err) {
       res.status(500).json({ error: "Error al ejecutar la consulta" });
@@ -147,6 +162,7 @@ app.get("/api/complementos", (req, res) => {
     res.json(results);
   });
 });
+
 app.get("/api/productos/:tableName/:productName/ncomplementos", (req, res) => {
   const { tableName, productName } = req.params;
 
@@ -167,6 +183,7 @@ app.get("/api/productos/:tableName/:productName/ncomplementos", (req, res) => {
       res.json({ Ncomplementos: results[0].Ncomplementos });
   });
 });
+
 
 
 

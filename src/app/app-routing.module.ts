@@ -3,14 +3,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CodigoMesaGuard } from './guards/codigo-mesa.guard';
 import { LoginComponent } from './login/login.component';
 import { PaginaAdminComponent } from './pagina-admin/pagina-admin.component';
+import { PedidoEnviadoComponent } from './pedido-enviado/pedido-enviado.component';
+import { PaginaLoadingComponent } from './pagina-loading/pagina-loading.component';
+
 const routes: Routes = [
+  { path: ':code/loading', component: PaginaLoadingComponent },
+  { path: ':code/pedido-enviado', component: PedidoEnviadoComponent },
+  { path: '', redirectTo: 'loading', pathMatch: 'full' },
 
-
-  {
-    path: '',
-    redirectTo: ':code/heladeria',
-    pathMatch: 'full'
-  },
   {
     path: 'administrador', // Ruta para la página de login
     component: LoginComponent
@@ -21,133 +21,161 @@ const routes: Routes = [
   },
 
   {
-    path: ':code/product-detail/:table/:id',
+    path: ':timestamp/:code/product-detail/:table/:id',
     loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
-  //Paginas principales enrutadas con el codigo de mesa
+
+  // Paginas principales enrutadas con el codigo de mesa
   {
-  path: ':code/heladeria',
-  loadChildren: () => import('./paginasPrincipales/heladeria/heladeria.module').then(m => m.HeladeriaPageModule),
-  canActivate: [CodigoMesaGuard]
+    path: ':timestamp/:code/heladeria',
+    loadChildren: () => import('./paginasPrincipales/heladeria/heladeria.module').then(m => m.HeladeriaPageModule),
+    canActivate: [CodigoMesaGuard]
   },
   {
-    path: ':code/kiosco',
-    loadChildren: () => import('./paginasPrincipales/kiosco/kiosco.module').then(m => m.KioscoPageModule)
+    path: ':timestamp/:code/kiosco',
+    loadChildren: () => import('./paginasPrincipales/kiosco/kiosco.module').then(m => m.KioscoPageModule),
+
   },
   {
-    path: ':code/rss',
+    path: ':timestamp/:code/rss',
     loadChildren: () => import('./paginasPrincipales/rss/rss.module').then(m => m.RssPageModule)
   },
 
-   //Rutas para la Heladeria
+  // Rutas para la Heladeria
   {
-    path: ':code/product-heladeria',
+    path: ':timestamp/:code/product-heladeria',
     loadChildren: () => import('./cartasProductos/cartaHeladeria/product-heladeria.module').then(m => m.ProductHeladeriaPageModule)
   },
   {
-    path: ':code/product-kiosco',
-    loadChildren: () => import('./cartasProductos/cartaKiosco/product-kiosco.module').then(m => m.ProductKioscoPageModule)
-  },
-  {
-    path: ':code/lista-pedido',
+    path: ':timestamp/:code/lista-pedido',
     loadChildren: () => import('./lista-pedido/lista-pedido.module').then(m => m.ListaPedidoPageModule)
   },
   {
-    path: ':code/cervezas',
+    path: ':timestamp/:code/cervezas',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/refrescos',
+    path: ':timestamp/:code/refrescos',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/vinos',
+    path: ':timestamp/:code/vinos',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/polos',
+    path: ':timestamp/:code/polos',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/ginebras',
+    path: ':timestamp/:code/ginebras',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/cafe',
+    path: ':timestamp/:code/cafe',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/bolleria',
+    path: ':timestamp/:code/bolleria',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/copas-helado',
+    path: ':timestamp/:code/copas-helado',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-  path: ':code/helados',
-  loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
-  },
-  {
-    path: ':code/granizados',
+    path: ':timestamp/:code/helados',
     loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':code/snacks',
+    path: ':timestamp/:code/granizados',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/chocolates',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/frappelatte',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/smoothies',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/infusiones',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/batido-helado',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/zumos',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/chupitos',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/copas',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/cubatas',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/cocteles',
+    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
+  },
+  {
+    path: ':timestamp/:code/promos-heladeria',
+    loadChildren: () => import('./promos-heladeria/promos-heladeria.module').then(m => m.PromosHeladeriaPageModule)
+  },
+
+  // Rutas para el Kiosco
+  {
+    path: ':timestamp/:code/product-kiosco',
+    loadChildren: () => import('./cartasProductos/cartaKiosco/product-kiosco.module').then(m => m.ProductKioscoPageModule)
+  },
+  {
+    path: ':timestamp/:code/snacks',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/cubatas',
-    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
-  },
-  {
-    path: ':code/batido-helado',
-    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
-  },
-  {
-    path: ':code/zumos',
-    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
-  },
-  {
-    path: ':code/smoothies',
-    loadChildren: () => import('./productosHeladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
-  },
-  {
-    path: ':code/frutos-secos',
+    path: ':timestamp/:code/frutos-secos',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/golosinas',
+    path: ':timestamp/:code/golosinas',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/caramelos',
+    path: ':timestamp/:code/caramelos',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/bebidas',
+    path: ':timestamp/:code/bebidas',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/juguetes',
+    path: ':timestamp/:code/juguetes',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/polos2',
+    path: ':timestamp/:code/polos2',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/galletas',
+    path: ':timestamp/:code/galletas',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
   {
-    path: ':code/prensa',
+    path: ':timestamp/:code/prensa',
     loadChildren: () => import('./productosKiosco/listaKiosco/listaKiosco.module').then(m => m.ListaKioscoPageModule)
   },
-  {
-    path: 'product-detail',
-    loadChildren: () => import('./product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
-  }
 ];
 
 @NgModule({

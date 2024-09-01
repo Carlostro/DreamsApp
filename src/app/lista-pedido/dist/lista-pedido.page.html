@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Lista de Pedido</ion-title>
+    <ion-title>Resumen de Pedido</ion-title>
     <ion-buttons slot="end">
       <ion-label>Mesa: {{ code }}</ion-label>
     </ion-buttons>
@@ -12,7 +12,7 @@
     <ion-item *ngFor="let product of orderList">
       <ion-label class="product-label">
         <h2>{{ product.Cantidad }}  X  {{ product.Nombre }}</h2>
-        <p>Precio por unidad: {{ product.Precio }}€</p>
+        <p>Precio por unidad: {{ getProductPrice(product) }}€</p>
         <!-- Mostrar complementos si existen -->
         <ng-container *ngIf="product.Complementos && product.Complementos.length > 0">
           <div *ngFor="let complemento of product.Complementos; let i = index">
@@ -22,7 +22,7 @@
         </ng-container>
       </ion-label>
       <div class="price-and-buttons">
-        <p class="total-price">{{ product.Cantidad * product.PrecioTotal | number:'1.2-2' }} €</p> <!-- Precio total por producto -->
+        <p class="total-price">{{ product.Cantidad * getProductPrice(product) | number:'1.2-2' }} €</p> <!-- Precio total por producto -->
         <div class="buttons">
           <ion-button class="custom-button" (click)="decrementQuantity(product)">
             <ion-icon name="remove-circle-outline"></ion-icon>
@@ -45,15 +45,25 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
-<ion-footer *ngIf="orderList.length > 0">
+
+<!-- Botones en pie de pagina-->
+<ion-footer>
   <ion-toolbar>
-    <ion-button expand="block" [routerLink]="['/', code, 'product-heladeria']">
-      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-      Seguir Comprando
-    </ion-button>
-    <ion-button  [disabled]="!isCodeValid" expand="block" (click)="printOrder()">
+    <ion-buttons slot="start">
+      <ion-button expand="block" [routerLink]="['/', timestamp, code, 'product-heladeria']" class="footer-button">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Ir a carta de Productos
+      </ion-button>
+      <ion-button expand="block" [routerLink]="['/', timestamp, code, 'promos-heladeria']" class="footer-button">
+        <ion-icon name="pricetags-outline" slot="start"></ion-icon>
+        Ir a Promociones
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+    <!-- Boton de imprimir pedido que solo aparece si hay algun producto en la lista -->
+    <ion-toolbar *ngIf="orderList.length > 0">
+    <ion-button [disabled]="!isCodeValid" expand="block" (click)="printOrder()" class="footer-button">
       <ion-icon name="print-outline" slot="start"></ion-icon>
       Enviar Pedido
     </ion-button>

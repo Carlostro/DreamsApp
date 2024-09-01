@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NavigationButtonsComponent implements OnInit {
   @Input() activePage: string = '';
+  @Input() timestamp: string | null = null;
   code: string = ''; // Definir la propiedad code
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -15,7 +16,9 @@ export class NavigationButtonsComponent implements OnInit {
   ngOnInit(): void {
     // Obtener el parámetro 'code' de la URL
     this.route.paramMap.subscribe(params => {
+      this.timestamp = params.get('timestamp') || '';
       this.code = params.get('code') || '';
+
     });
   }
 

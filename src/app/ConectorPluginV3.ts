@@ -23,7 +23,7 @@ const ConectorPluginV3 = (() => {
         serial: string;
         operaciones: Operacion[];
 
-        static URL_PLUGIN_POR_DEFECTO = "http://192.168.1.41:8000";
+        static URL_PLUGIN_POR_DEFECTO = "http://localhost:8000";
         static Operacion = Operacion;
         static TAMAÑO_IMAGEN_NORMAL = 0;
         static TAMAÑO_IMAGEN_DOBLE_ANCHO = 1;
@@ -211,17 +211,32 @@ const ConectorPluginV3 = (() => {
         }
 
         async imprimirEn(nombreImpresora: string) {
-            const payload = {
-                operaciones: this.operaciones,
-                nombreImpresora,
-                serial: this.serial,
-            };
-            const response = await fetch(this.ruta + "/imprimir", {
-                method: "POST",
-                body: JSON.stringify(payload),
-            });
-            return await response.json();
-        }
+          const payload = {
+              operaciones: this.operaciones,
+              nombreImpresora,
+              serial: this.serial,
+          };
+
+          try {
+              const response = await fetch(this.ruta + "/imprimir", {
+                  method: "POST",
+                  body: JSON.stringify(payload),
+              });
+
+              // Intenta leer la respuesta
+              const jsonResponse = await response.json();
+
+              // Verifica si no se recibió respuesta o la respuesta no es true
+              if (!jsonResponse || jsonResponse !== true) {
+                  throw new Error('Error en la respuesta del servidor: respuesta inválida o no se recibió respuesta');
+              }
+
+              return jsonResponse;
+          } catch (error) {
+              console.error('Error durante la impresión:', error);
+              throw error;  // Propaga el error hacia el llamador
+          }
+      }
     }
     return ConectorPlugin;
 })();

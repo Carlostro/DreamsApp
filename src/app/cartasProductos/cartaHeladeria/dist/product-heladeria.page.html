@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Carta de Productos</ion-title>
+    <ion-title class="centered-title">Carta de Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,53 +11,94 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button [routerLink]="['/', code, 'cervezas', { title: 'Cervezas' }]">
-    <img src="assets/categorias/cerveza.jpg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'granizados', { title: 'Granizados' }]">
-    <img src="assets/categorias/granizado.jpg" class="button-image"/>
-  </ion-button>
-
-  <ion-button [routerLink]="['/', code, 'refrescos', { title: 'Refrescos' }]">
-    <img src="assets/categorias/refrescos.jpg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'polos', { title: 'Polos' }]">
-    <img src="assets/categorias/polos.jpg" class="button-image"/>
-  </ion-button>
-
-  <ion-button [routerLink]="['/', code, 'copas-helado', { title: 'Copas de Helado Carta' }]">
-    <img src="assets/categorias/copaHelado.jpg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'helados', { title: 'Helados Personalizados' }]">
-    <img src="assets/categorias/copaHelado.jpg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'ginebras', { title: 'Ginebras' }]">
-    <img src="assets/categorias/ginebras.jpg" class="button-image"/>
-  </ion-button>
-
-  <ion-button [routerLink]="['/', code, 'cubatas', { title: 'Cubatas' }]">
-    <img src="assets/categorias/cubatas.jpeg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'batido-helado', { title: 'Batidos de Helado' }]">
-    <img src="assets/categorias/Batidos.png" class="button-image"/>
-  </ion-button>
-
-  <ion-button [routerLink]="['/', code, 'zumos', { title: 'Zumos' }]">
-    <img src="assets/categorias/zumos.jpg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'smoothies', { title: 'Smoothies' }]">
-    <img src="assets/categorias/smoothies.jpg" class="button-image"/>
-  </ion-button>
-
-  <ion-button [routerLink]="['/', code, 'vinos', { title: 'Vinos' }]">
-    <img src="assets/categorias/vinos.jpg" class="button-image"/>
-  </ion-button>
-  <ion-button [routerLink]="['/', code, 'cafe', { title: 'Cafes' }]">
+  <ion-button class="image-button" [routerLink]="['/', timestamp, code, 'cafe', { title: 'Cafes' }]">
     <img src="assets/categorias/cafe.jpg" class="button-image"/>
   </ion-button>
 
-  <ion-button [routerLink]="['/', code, 'bolleria', { title: 'Bolleria' }]">
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'refrescos', { title: 'Refrescos' }]">
+    <img src="assets/categorias/refrescos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'cervezas', { title: 'Cervezas' }]">
+    <img src="assets/categorias/cerveza.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'copas-helado', { title: 'Copas de Helado' }]">
+    <img src="assets/categorias/copaHelado.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'helados', { title: 'Helados Personalizados' }]">
+    <img src="assets/categorias/helados personalizados.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'granizados', { title: 'Granizados' }]">
+    <img src="assets/categorias/granizado.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'frappelatte', { title: 'Frappelatte' }]">
+    <img src="assets/categorias/frappe.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'smoothies', { title: 'Smoothies' }]">
+    <img src="assets/categorias/smoothies.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'infusiones', { title: 'Infusiones' }]">
+    <img src="assets/categorias/infusiones.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'chocolates', { title: 'Chocolates' }]">
+    <img src="assets/categorias/chocolates.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'batido-helado', { title: 'Batidos Helados' }]">
+    <img src="assets/categorias/batidoHelado.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'zumos', { title: 'Zumos y Batidos' }]">
+    <img src="assets/categorias/zumos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'polos', { title: 'Polos' }]">
+    <img src="assets/categorias/polos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'bolleria', { title: 'Bolleria' }]">
     <img src="assets/categorias/bolleria.jpg" class="button-image"/>
   </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'chupitos', { title: 'Chupitos' }]">
+    <img src="assets/categorias/chupitos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'copas', { title: 'Copas' }]">
+    <img src="assets/categorias/copas.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'vinos', { title: 'Vinos' }]">
+    <img src="assets/categorias/vinos.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'cubatas', { title: 'Cubatas' }]">
+    <img src="assets/categorias/cubatas.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'ginebras', { title: 'Ginebras' }]">
+    <img src="assets/categorias/ginebras.jpg" class="button-image"/>
+  </ion-button>
+
+  <ion-button class="image-button"[routerLink]="['/',timestamp, code, 'cocteles', { title: 'Cocteles' }]">
+    <img src="assets/categorias/cocteles.jpg" class="button-image"/>
+  </ion-button>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar *ngIf="cartItems > 0">
+    <ion-button expand="block" [routerLink]="['/',timestamp, code, 'lista-pedido']">
+      <ion-icon name="cart-outline" slot="start"></ion-icon>
+      Ver Pedido ({{ cartItems }})
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
 

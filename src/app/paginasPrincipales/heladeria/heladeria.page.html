@@ -10,10 +10,10 @@
   <div class="image-container">
     <img src="assets/Dreams.jpg" class="content-image">
   </div>
-  <div class="button-container">
-    <ion-button expand="block" [routerLink]="['/', code, 'product-heladeria']"  color="light">Promociones</ion-button>
-    <ion-button expand="block" [routerLink]="['/', code, 'product-heladeria']"  color="light">Carta y Pedidos</ion-button>
-  </div>
+<div class="button-container">
+  <ion-button expand="block" [routerLink]="promosRoute" color="light">Promociones</ion-button>
+  <ion-button expand="block" [routerLink]="productRoute" color="light">Carta y Pedidos</ion-button>
+</div>
 </ion-content>
 <ion-footer>
   <app-navigation-buttons [activePage]="'heladeria'"></app-navigation-buttons>

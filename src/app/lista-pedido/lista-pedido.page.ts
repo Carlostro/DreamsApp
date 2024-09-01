@@ -5,33 +5,44 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import ConectorPluginV3 from '../ConectorPluginV3';
-
-const conector = new ConectorPluginV3();
+import { CodigoMesaGuard } from '../guards/codigo-mesa.guard';
+import { Router } from '@angular/router';
+import { TimestampService } from '../services/timestamp.service';
 
 @Component({
   selector: 'app-lista-pedido',
   templateUrl: './lista-pedido.page.html',
   styleUrls: ['./lista-pedido.page.scss'],
-
 })
 export class ListaPedidoPage implements OnInit {
   orderList: Product[] = [];
   totalCost: number = 0;
   code: string | null = null;
+  timestamp: string | null = null;
+  timestampActual: string | null = null;
   isCodeValid: boolean = true;
+  savedTimestamp: string = '';
+  savedRandomString: string = '';
+  expirationTime: number = 5 * 60 * 1000; // 1 minuto en milisegundos
 
   constructor(
     private orderService: OrderService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private codigoMesaGuard: CodigoMesaGuard,
+    private router: Router,
+    private timestampService: TimestampService
   ) {}
 
   ngOnInit() {
     // Suscríbete a los cambios en los parámetros de la ruta
     this.route.paramMap.subscribe(params => {
-    this.code = params.get('code');
-    this.compareCodes();
+      this.code = params.get('code');
+      this.timestamp = params.get('timestamp');
+      this.timestampActual = Date.now().toString();
+      console.log('Timestamp inicializado:', this.timestampActual);
+      this.compareCodes();
     });
 
     this.loadOrderList();
@@ -41,23 +52,69 @@ export class ListaPedidoPage implements OnInit {
     return localStorage.getItem('codigoMesaGuardado');
   }
 
-  async compareCodes(): Promise<void> {
-    const savedCode = this.getSavedCode();
-    if (this.code !== savedCode) {
-      this.isCodeValid = false;
-      await this.showAlert();
-    } else {
-      this.isCodeValid = true;
-    }
+  getSavedTimestamp(): string | null {
+    return localStorage.getItem('timestampGuardado');
   }
 
-  async showAlert() {
+  getSavedRandomString(): string | null {
+    return localStorage.getItem('randomStringGuardado');
+  }
+
+  async compareCodes(): Promise<void> {
+    const savedCode = this.getSavedCode();
+    const savedTimestamp = this.getSavedTimestamp();
+    const savedRandomString = this.getSavedRandomString();
+
+    if (this.code !== savedCode) {
+        this.isCodeValid = false;
+        await this.showAlert('Código Modificado', 'El código de la URL ha sido modificado, cierre la app y vuelva a escanear el código QR. 😢');
+    } else if (savedTimestamp && savedRandomString) {
+        // Decodificar el timestamp guardado
+        const decodedString = atob(savedTimestamp);
+        const decodedTimestampString = decodedString.split(savedRandomString)[0];
+        const decodedTimestamp = parseInt(decodedTimestampString, 10);
+
+        // Asegúrate de que this.timestampActual no sea null
+        const currentTimestamp = this.timestampActual ? parseInt(this.timestampActual, 10) : NaN;
+
+        // Convertir timestamps a fechas legibles
+        const decodedDate = new Date(decodedTimestamp);
+        const currentDate = new Date(currentTimestamp);
+
+        console.log('Timestamp guardado decodificado:', decodedTimestampString);
+        console.log('Fecha decodificada:', decodedDate.toLocaleString()); // Formato legible del timestamp guardado
+        console.log('Timestamp actual:', currentTimestamp);
+        console.log('Fecha actual:', currentDate.toLocaleString()); // Formato legible del timestamp actual
+
+        // Verifica si currentTimestamp es un número válido
+        if (isNaN(currentTimestamp)) {
+            console.error('Timestamp actual es inválido');
+            this.isCodeValid = false;
+            await this.showAlert('Error de Timestamp', 'El timestamp actual es inválido. 😢');
+        } else {
+            const isTimestampValid = decodedTimestamp + this.expirationTime >= currentTimestamp;
+
+            if (!isTimestampValid) {
+                this.isCodeValid = false;
+                await this.showAlert('Sesión Caducada', 'La sesión ha caducado, cierre la app y vuelva a escanear el código QR. 😢');
+            } else {
+                this.isCodeValid = true;
+            }
+        }
+    } else {
+        this.isCodeValid = true;
+    }
+}
+
+
+
+
+  async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
-      header: 'Código Modificado',
-      message: 'El código de la URL ha sido modificado, cierre la app y vuelva a empezar. 😢',
+      header,
+      message,
       buttons: ['OK']
     });
-
     await alert.present();
   }
 
@@ -68,8 +125,13 @@ export class ListaPedidoPage implements OnInit {
     });
   }
 
+  // Método para determinar el precio correcto
+  getProductPrice(product: Product): number {
+    return product.PrecioTotal !== undefined ? product.PrecioTotal : product.Precio;
+  }
+
   calculateTotalCost(): void {
-    this.totalCost = this.orderList.reduce((total, product) => total + (product.Cantidad * product.Precio), 0);
+    this.totalCost = this.orderList.reduce((total, product) => total + (product.Cantidad * this.getProductPrice(product)), 0);
   }
 
   incrementQuantity(product: Product): void {
@@ -86,7 +148,12 @@ export class ListaPedidoPage implements OnInit {
     }
     this.loadOrderList();
   }
-  printOrder() {
+
+  async printOrder() {
+    // Crear un nuevo objeto conector para cada impresión
+    const conector = new ConectorPluginV3();
+
+    console.log('Imprimir pedido');
     const codigoMesa = this.code; // Código de la mesa recogido de la URL
     const fechaHoy = new Date();
     const fecha = fechaHoy.toLocaleDateString();
@@ -94,40 +161,118 @@ export class ListaPedidoPage implements OnInit {
 
     conector
       .Iniciar()
+      .Corte(0)
       .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
-      //.CargarImagenLocalEImprimir("C:/Users/carlo/Desktop/Dreams/DreamsApp/src/assets/logo ticket.png", ConectorPluginV3.TAMAÑO_IMAGEN_NORMAL, 200)
-
+      .Feed(1)
+      .CargarImagenLocalEImprimir("C:/Users/carlo/Desktop/Dreams/DreamsApp/src/assets/logo ticket.png", 0, 0)
+      .Feed(1)
+      .Iniciar()
+      .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+      .EscribirTexto(`DON VITE S.L}\n`)
+      .EscribirTexto(`CIF B97074843}\n`)
+      .EscribirTexto(`PLAZA MAYOR 58\n`)
+      .EscribirTexto(`ALZIRA\n`)
       .EscribirTexto(`DreamsApp           Mesa: ${codigoMesa}\n`)
       .EscribirTexto(`Fecha: ${fecha} Hora: ${hora}\n`)
       .EscribirTexto("----------------------------------------\n")
-      .EscribirTexto("Unid  Descripcion       Precio   Importe\n")
-      .EscribirTexto("----------------------------------------\n");
+      .EscribirTexto("Unid  Descripcion         Precio   Importe\n")
+      .EscribirTexto("----------------------------------------\n")
+      .Iniciar()
+
 
     let totalLista = 0;
+    const maxNombreLength = 22; // Longitud máxima del nombre del producto
 
     this.orderList.forEach(product => {
       const totalProducto = product.Cantidad * product.Precio;
-      totalLista += totalProducto;
 
-      // Formatear la línea para que el nombre del producto comience desde el mismo punto
-      const cantidad = product.Cantidad.toString().padEnd(3, ' ');
-      const nombre = product.Nombre.padEnd(20, ' ');
-      const precio = product.Precio.toFixed(2).padStart(1, ' ');
-      const importe = totalProducto.toFixed(2).padStart(8, ' ');
+      // Calcular el total de los complementos
+      let totalComplementos = 0;
+      if (product.Complementos && product.Complementos.length > 0) {
+        product.Complementos.forEach(complemento => {
+          totalComplementos += complemento.Precio;
+        });
+      }
 
-      conector.EscribirTexto(
-        `${cantidad}${nombre}${precio}${importe}\n`
-      );
+      const totalProductoConComplementos = totalProducto + totalComplementos;
+      totalLista += totalProductoConComplementos;
+
+      // Definir columnas fijas para cada elemento
+      const columnaCantidad = 2; // Columna fija para la cantidad
+      const columnaNombre = 5; // este valor ajusta la distancia entre el nombre y el precio
+      const columnaPrecio = 8; // Columna fija para el precio
+      const columnaImporte = 9; // Columna fija para el importe
+      const columnaPrecioComplemento = 7; // Columna fija para el precio
+
+      //Ajustamos el nombre del producto si emas largo de 22 letras
+      let nombre = product.Nombre || ''; // Asegurarse de que el nombre no sea undefined
+      if (nombre.length > maxNombreLength) {
+        nombre = nombre.substring(0, maxNombreLength); // Recortar el nombre si es mayor a maxNombreLength
+      }
+      // Rellenar el nombre hasta 22 caracteres con espacios si no ocupa 22 letras
+      if (nombre.length < 22) {
+        let rellenaHuecoNombre = 22 - nombre.length;
+        nombre = nombre.padEnd(nombre.length + rellenaHuecoNombre, ' ');
+    }
+
+      const nombreFormateado = nombre.padEnd(columnaNombre, ' ');
+
+      const cantidadFormateada = product.Cantidad.toString().padEnd(columnaCantidad, ' ');
+      const precioFormateado = product.Precio.toFixed(2).padStart(columnaPrecio, ' ');
+      const importeFormateado = totalProductoConComplementos.toFixed(2).padStart(columnaImporte, ' ');
+      //Imprimir el producto sin complementos
+      console.log('numero de letras nombre:', product.Nombre.length);
+      conector.EscribirTexto(`${cantidadFormateada}${nombreFormateado}${precioFormateado}${importeFormateado}\n`);
+
+      //---------------------------------------------------------------------------------------------------------------
+      //                               Ajuste de los complementos
+      //---------------------------------------------------------------------------------------------------------------
+
+      // Añadir complementos si existen
+      if (product.Complementos && product.Complementos.length > 0) {
+        product.Complementos.forEach(complemento => {
+          let complementoNombre = complemento.Nombre; // Sin padding adicional
+          const complementoPrecio = complemento.Precio.toFixed(2);
+
+         // Rellenar el nombre del complemento hasta 20 caracteres con espacios si no ocupa 20 letras
+          console.log('numero de letras complemento:', complementoNombre.length);
+          if (complementoNombre.length < 20) {
+              let rellenaHuecos = 20 - complementoNombre.length;
+              complementoNombre = complementoNombre.padEnd(complementoNombre.length + rellenaHuecos, ' ');
+          }
+          //imprimir el complemento
+          const complementoNombreFormateado = complementoNombre.padEnd(columnaNombre , ' '); // Ajustar la posición del nombre del complemento
+          const complementoPrecioFormateado = complementoPrecio.padStart(columnaPrecioComplemento, ' '); // Ajustar la posición del precio del complemento
+          conector.EscribirTexto(`   + ${' '.repeat(columnaCantidad -2)}${complementoNombreFormateado}${complementoPrecioFormateado}\n`);
+        });
+      }
     });
+    //---------------------------------------------------------------------------------------------------------------
 
     conector.EscribirTexto("----------------------------------------\n");
     conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA);
     conector.EstablecerTamañoFuente(2,2);
     conector.EscribirTexto(`\nTotal: ${totalLista.toFixed(2)}\n`);
 
-    conector.imprimirEn("PrintApp");
-    conector.CorteParcial();
-}
-}
+    conector.EscribirTexto("\n");
+    conector.EscribirTexto("\n");
+    conector.EscribirTexto("\n");
+    conector.EscribirTexto("\n");
+    conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+    conector.EstablecerTamañoFuente(1,1);
+    conector.EscribirTexto("Gracias por su visita\n");
+
+    conector.Corte(80);
+
+    try {
+      const response = await conector.imprimirEn("PrintApp");
+      this.orderService.clearOrder();
+      this.router.navigate([`${codigoMesa}/pedido-enviado`]);
+  } catch (error) {
+      // Manejar el error de impresión
+      console.error('Error al imprimir el pedido:', error);
+      this.showAlert('Error de Impresión', '¡Ups! Ha habido algún problema, vuelve a intentarlo.');
+  }}
 
 
+}

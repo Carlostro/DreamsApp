@@ -23,6 +23,12 @@ export class OrderService {
     return this.http.get<Product[]>(`${this.apiUrl}/data/${table}`);
   }
 
+  getPromotions(): Observable<Product[]> {
+    console.log("getPromotions");
+    const url = `${this.apiUrl}/promosheladeria/active`; // Actualizar la URL para obtener promociones activas
+    return this.http.get<Product[]>(url);
+  }
+
   addProduct(product: Product): void {
     const existingProduct = this.orderList.find(p =>
       p.Nombre === product.Nombre &&
@@ -66,5 +72,10 @@ export class OrderService {
 
   getOrderList(): Observable<Product[]> {
     return this.orderListSubject.asObservable();
+  }
+
+  clearOrder(): void {
+    this.orderList = [];
+    this.orderListSubject.next(this.orderList); // Notifica a los suscriptores que la lista ha sido vaciada
   }
 }

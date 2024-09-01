@@ -1,0 +1,1 @@
+.loading-container{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh}.loading-animation{display:flex;justify-content:space-around;width:100px}.ball{width:20px;height:20px;background-color:#3498db;border-radius:50%;animation:bounce .5s infinite alternate}@keyframes bounce{to{transform:translateY(-50px)}}

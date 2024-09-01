@@ -64,3 +64,15 @@ button:hover {
 .product-label {
   margin-top: -4px; /* Ajusta el margen superior para subir la parte izquierda */
 }
+.footer-button {
+  --background: #3080e2; /* Fondo azul */
+  --color: white; /* Texto blanco */
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  font-size: 1em; /* Aumenta el tamaño del botón */
+  fill: solid; /* Asegura que el fondo sea sólido */
+}
+
+.footer-button ion-icon {
+  font-size: 1em; /* Aumenta el tamaño del icono */
+}

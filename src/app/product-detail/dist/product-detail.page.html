@@ -3,7 +3,8 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>
-        <span class="product-name">{{ product?.Nombre }}</span> <span class="product-price">{{ product?.Precio + "€" }}</span>
+        <span class="product-name">{{ product?.Nombre }}</span>
+        <span class="product-price">{{ product?.Precio + "€" }}</span>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -13,15 +14,20 @@
 
   <!-- Lista de productos complementarios -->
   <ion-list *ngIf="complementos.length > 0">
-    <ion-list-header class="complementos-header">Elige con que lo quieres combinar</ion-list-header>
+    <ion-list-header class="complementos-header">Elige con qué lo quieres combinar</ion-list-header>
     <ion-item *ngFor="let complemento of complementos" (click)="selectComplemento(complemento)">
       <ion-label>
         <h2>
           {{ complemento.Nombre }}
-          <span *ngIf="tableName === 'Cafes'" style="margin-left: 10px;"> Precio: {{ complemento.Precio }}€</span>
+          <span *ngIf="tableName === 'Cafes' || tableName === 'Bolleria'
+          || tableName === 'Infusiones'"  style="margin-left: 10px;"> Precio: {{ complemento.Precio }}€</span>
         </h2>
       </ion-label>
-      <ion-checkbox slot="start" [checked]="isComplementoSelected(complemento)"></ion-checkbox>
+      <ion-checkbox
+        slot="start"
+        [checked]="isComplementoSelected(complemento)"
+        [disabled]="isComplementoDisabled(complemento)">
+      </ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>
@@ -33,7 +39,7 @@
       <ion-button (click)="addToOrder()">Añadir a Pedido</ion-button>
       <ion-button (click)="goBack()">Volver</ion-button>
     </div>
-    <ion-button *ngIf="cartItems > 0" expand="block" [routerLink]="['/', code, 'lista-pedido']">
+    <ion-button *ngIf="cartItems > 0" expand="block" [routerLink]="['/',timestamp, code, 'lista-pedido']">
       Ver Pedido ({{ cartItems }})
     </ion-button>
   </ion-toolbar>

@@ -1,6 +1,6 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
-    <ion-title>{{ pageTitle }}</ion-title>
+    <ion-title class="centered-title">{{ pageTitle }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,12 +25,12 @@
 <!-- Botón en la parte inferior para abrir la lista de productos añadidos y volver a la carta -->
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="block" [routerLink]="['/', code, 'product-heladeria']">
+    <ion-button expand="block" [routerLink]="['/', timestamp, code, 'product-heladeria']">
       Volver a la Carta
     </ion-button>
   </ion-toolbar>
   <ion-toolbar *ngIf="cartItems > 0">
-    <ion-button expand="block" [routerLink]="['/', code, 'lista-pedido']">
+    <ion-button expand="block" [routerLink]="['/',timestamp, code, 'lista-pedido']">
       <ion-icon name="cart-outline" slot="start"></ion-icon>
       Ver Pedido ({{ cartItems }})
     </ion-button>

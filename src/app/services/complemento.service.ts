@@ -9,6 +9,7 @@ export class ComplementoService {
   public apiUrl = 'http://localhost:3000/api/complementos';
   public productosApiUrl ='http://localhost:3000/api/productos';
   //public apiUrl = 'http://192.168.1.41:3000/api/complementos';
+  // public productosApiUrl ='http://192.168.1.41:3000/api/productos';
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +21,7 @@ export class ComplementoService {
     const encodedProductName = encodeURIComponent(productName);
     const url = `${this.productosApiUrl}/${encodedTableName}/${encodedProductName}/ncomplementos`;
     return this.http.get<{ Ncomplementos: number }>(url);
+    console.log(url);
   }
 
 
