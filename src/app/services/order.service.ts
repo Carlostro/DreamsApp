@@ -12,8 +12,8 @@ export class OrderService {
   private orderListSubject: BehaviorSubject<Product[]> = new BehaviorSubject(this.orderList);
 
   constructor(private http: HttpClient) {}
-  public apiUrl = 'http://localhost:3000/api';
-  //public apiUrl = 'http://192.168.1.41:3000/api';
+  //public apiUrl = 'http://localhost:3000/api';
+  public apiUrl = 'http://192.168.1.44:3000/api';
 
   getProductById(table: string, id: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/data/${table}/${id}`);

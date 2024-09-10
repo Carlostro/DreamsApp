@@ -16,6 +16,7 @@ import { ProductService } from './services/product.service';
 import { ComplementoService } from './services/complemento.service';
 import { PaginaLoadingComponent } from './pagina-loading/pagina-loading.component';
 import { TimestampService } from './services/timestamp.service';
+import {FileService} from './services/file.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TimestampService } from './services/timestamp.service';
         CodigoMesaGuard,
         ProductService,
         ComplementoService,
-        TimestampService],
+        TimestampService,
+        FileService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

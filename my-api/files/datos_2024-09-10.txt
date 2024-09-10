@@ -1,0 +1,35 @@
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:07:52
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:09:55
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:10:51
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:12:00
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:12:18
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:15:10
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 10/9/2024, 0:15:49
+Importe Total: 3.50

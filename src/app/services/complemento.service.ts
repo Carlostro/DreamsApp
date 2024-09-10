@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ComplementoService {
-  public apiUrl = 'http://localhost:3000/api/complementos';
-  public productosApiUrl ='http://localhost:3000/api/productos';
-  //public apiUrl = 'http://192.168.1.41:3000/api/complementos';
-  // public productosApiUrl ='http://192.168.1.41:3000/api/productos';
+  //public apiUrl = 'http://localhost:3000/api/complementos';
+  //public productosApiUrl ='http://localhost:3000/api/productos';
+  public apiUrl = 'http://192.168.1.44:3000/api/complementos';
+  public productosApiUrl ='http://192.168.1.44:3000/api/productos';
 
   constructor(private http: HttpClient) {}
 

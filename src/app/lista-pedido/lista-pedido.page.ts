@@ -8,6 +8,7 @@ import ConectorPluginV3 from '../ConectorPluginV3';
 import { CodigoMesaGuard } from '../guards/codigo-mesa.guard';
 import { Router } from '@angular/router';
 import { TimestampService } from '../services/timestamp.service';
+import { FileService } from '../services/file.service';
 
 @Component({
   selector: 'app-lista-pedido',
@@ -23,7 +24,8 @@ export class ListaPedidoPage implements OnInit {
   isCodeValid: boolean = true;
   savedTimestamp: string = '';
   savedRandomString: string = '';
-  expirationTime: number = 5 * 60 * 1000; // 1 minuto en milisegundos
+  expirationTime: number = 15 * 60 * 1000; // 15 minuto en milisegundos
+  isSending: boolean = false;
 
   constructor(
     private orderService: OrderService,
@@ -32,7 +34,8 @@ export class ListaPedidoPage implements OnInit {
     private alertController: AlertController,
     private codigoMesaGuard: CodigoMesaGuard,
     private router: Router,
-    private timestampService: TimestampService
+    private timestampService: TimestampService,
+    private fileService: FileService
   ) {}
 
   ngOnInit() {
@@ -150,6 +153,12 @@ export class ListaPedidoPage implements OnInit {
   }
 
   async printOrder() {
+    if (this.isSending) {
+      return; // Si ya se está enviando, no hacer nada
+    }
+
+    this.isSending = true; // Deshabilitar el botón de enviar
+
     // Crear un nuevo objeto conector para cada impresión
     const conector = new ConectorPluginV3();
 
@@ -228,24 +237,31 @@ export class ListaPedidoPage implements OnInit {
       //                               Ajuste de los complementos
       //---------------------------------------------------------------------------------------------------------------
 
-      // Añadir complementos si existen
-      if (product.Complementos && product.Complementos.length > 0) {
-        product.Complementos.forEach(complemento => {
-          let complementoNombre = complemento.Nombre; // Sin padding adicional
-          const complementoPrecio = complemento.Precio.toFixed(2);
+// Añadir complementos si existen
+if (product.Complementos && product.Complementos.length > 0) {
+  product.Complementos.forEach(complemento => {
+    let complementoNombre = complemento.Nombre || ''; // Sin padding adicional
+    const complementoPrecio = complemento.Precio !== undefined ? complemento.Precio.toFixed(2) : '0.00';
 
-         // Rellenar el nombre del complemento hasta 20 caracteres con espacios si no ocupa 20 letras
-          console.log('numero de letras complemento:', complementoNombre.length);
-          if (complementoNombre.length < 20) {
-              let rellenaHuecos = 20 - complementoNombre.length;
-              complementoNombre = complementoNombre.padEnd(complementoNombre.length + rellenaHuecos, ' ');
-          }
-          //imprimir el complemento
-          const complementoNombreFormateado = complementoNombre.padEnd(columnaNombre , ' '); // Ajustar la posición del nombre del complemento
-          const complementoPrecioFormateado = complementoPrecio.padStart(columnaPrecioComplemento, ' '); // Ajustar la posición del precio del complemento
-          conector.EscribirTexto(`   + ${' '.repeat(columnaCantidad -2)}${complementoNombreFormateado}${complementoPrecioFormateado}\n`);
-        });
-      }
+    // Rellenar el nombre del complemento hasta 20 caracteres con espacios si no ocupa 20 letras
+    console.log('numero de letras complemento:', complementoNombre.length);
+    if (complementoNombre.length < 20) {
+      let rellenaHuecos = 20 - complementoNombre.length;
+      complementoNombre = complementoNombre.padEnd(complementoNombre.length + rellenaHuecos, ' ');
+    }
+
+    // Imprimir el complemento
+    const complementoNombreFormateado = complementoNombre.padEnd(columnaNombre, ' '); // Ajustar la posición del nombre del complemento
+    let complementoPrecioFormateado = '';
+
+    // Si el precio no es 0, formatear e imprimir el precio
+    if (parseFloat(complementoPrecio) !== 0) {
+      complementoPrecioFormateado = complementoPrecio.padStart(columnaPrecioComplemento, ' '); // Ajustar la posición del precio del complemento
+    }
+
+    conector.EscribirTexto(`   + ${' '.repeat(columnaCantidad - 2)}${complementoNombreFormateado}${complementoPrecioFormateado}\n`);
+  });
+}
     });
     //---------------------------------------------------------------------------------------------------------------
 
@@ -266,13 +282,34 @@ export class ListaPedidoPage implements OnInit {
 
     try {
       const response = await conector.imprimirEn("PrintApp");
+
+      // Obtener la fecha y hora actual
+      const fechaHora = new Date().toLocaleString();
+      // Preparar los datos para escribir en el archivo
+      const datos = `Número de Mesa: ${codigoMesa}\nHora: ${fechaHora}\nImporte Total: ${this.totalCost.toFixed(2)}\n`;
+      // Escribir los datos en el archivo
+      this.fileService.writeToFile('datos_envio.txt', datos).subscribe(
+        () => {
+          console.log('Datos enviados al servidor para guardar en el archivo');
+        },
+        (error) => {
+          console.error('Error al enviar los datos al servidor:', error);
+        }
+      );
+
+    // Guardar la hora del último pedido en localStorage
+    //Restriccion de pedido continuos
+    localStorage.setItem(`ultimoPedido_${codigoMesa}`, new Date().toISOString());
+
       this.orderService.clearOrder();
       this.router.navigate([`${codigoMesa}/pedido-enviado`]);
   } catch (error) {
       // Manejar el error de impresión
       console.error('Error al imprimir el pedido:', error);
       this.showAlert('Error de Impresión', '¡Ups! Ha habido algún problema, vuelve a intentarlo.');
-  }}
-
+  } finally {
+    this.isSending = false;
+}
+}
 
 }

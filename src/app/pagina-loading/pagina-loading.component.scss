@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  font-size: 22px;
 }
 
 .loading-animation {
@@ -25,4 +26,17 @@
   to {
     transform: translateY(-50px);
   }
+}
+
+.loading-contador {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.aviso-menores {
+  font-size: 32px;
+  color: red;
+  margin-left: 30px;
+  margin-right: 10px;
+  font-weight: bold;
 }

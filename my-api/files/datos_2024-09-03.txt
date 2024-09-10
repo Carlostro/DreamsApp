@@ -1,0 +1,30 @@
+
+--------------------
+Número de Mesa: 12
+Hora: 4/9/2024, 1:43:09
+Importe Total: 17.50
+
+--------------------
+Número de Mesa: 12
+Hora: 4/9/2024, 1:43:57
+Importe Total: 6.90
+
+--------------------
+Número de Mesa: 12
+Hora: 4/9/2024, 1:51:01
+Importe Total: 6.90
+
+--------------------
+Número de Mesa: 12
+Hora: 4/9/2024, 1:51:31
+Importe Total: 17.80
+
+--------------------
+Número de Mesa: 88
+Hora: 4/9/2024, 1:55:57
+Importe Total: 20.70
+
+--------------------
+Número de Mesa: 88
+Hora: 4/9/2024, 1:56:31
+Importe Total: 8.50

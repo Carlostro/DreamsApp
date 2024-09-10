@@ -16,7 +16,7 @@ export class ListaHeladeriaPage implements OnInit {
   code: string | null = null; // Código de la mesa
   timestamp: string | null = null; // Timestamp
   allowedTablesForDetails: string[] = ['Cubatas','Helados Personalizados',
-    'Cafes','Bolleria','Ginebras','Batido Helado','Infusiones']; // Lista de tablas permitidas
+    'Cafes','Bolleria','Ginebras','Batidos Helados','Infusiones']; // Lista de tablas permitidas
   selectedTable: string = '';
 
   constructor(

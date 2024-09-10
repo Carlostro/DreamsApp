@@ -1,0 +1,45 @@
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:20:12
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:23:30
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:24:05
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:36:30
+Importe Total: 2.80
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:40:00
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:41:10
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:53:36
+Importe Total: 1.20
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:54:15
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 8/9/2024, 0:55:54
+Importe Total: 3.50

@@ -1,0 +1,10 @@
+
+--------------------
+Número de Mesa: 12
+Hora: 6/9/2024, 10:15:07
+Importe Total: 6.00
+
+--------------------
+Número de Mesa: 12
+Hora: 6/9/2024, 10:15:30
+Importe Total: 1.60

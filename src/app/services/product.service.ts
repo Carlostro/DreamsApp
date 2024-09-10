@@ -11,8 +11,8 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-   public apiUrl = 'http://localhost:3000/api';
-   //public apiUrl = 'http://192.168.1.41:3000/api';
+   //public apiUrl = 'http://localhost:3000/api';
+   public apiUrl = 'http://192.168.1.44:3000/api';
 
    getTables(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/tables`).pipe(

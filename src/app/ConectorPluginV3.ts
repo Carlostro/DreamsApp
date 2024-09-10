@@ -23,7 +23,7 @@ const ConectorPluginV3 = (() => {
         serial: string;
         operaciones: Operacion[];
 
-        static URL_PLUGIN_POR_DEFECTO = "http://localhost:8000";
+        static URL_PLUGIN_POR_DEFECTO = "http://192.168.1.44:8000";
         static Operacion = Operacion;
         static TAMAÑO_IMAGEN_NORMAL = 0;
         static TAMAÑO_IMAGEN_DOBLE_ANCHO = 1;

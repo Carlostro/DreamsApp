@@ -1,0 +1,75 @@
+
+--------------------
+Número de Mesa: 14
+Hora: 7/9/2024, 2:05:59
+Importe Total: 4.60
+
+--------------------
+Número de Mesa: 14
+Hora: 7/9/2024, 2:11:15
+Importe Total: 5.60
+
+--------------------
+Número de Mesa: 14
+Hora: 7/9/2024, 2:17:23
+Importe Total: 4.60
+
+--------------------
+Número de Mesa: 14
+Hora: 7/9/2024, 2:25:01
+Importe Total: 4.60
+
+--------------------
+Número de Mesa: 11
+Hora: 7/9/2024, 2:38:47
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 22:59:16
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 12
+Hora: 7/9/2024, 23:08:53
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:30:02
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:35:20
+Importe Total: 2.30
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:37:21
+Importe Total: 2.80
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:38:30
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:39:58
+Importe Total: 2.80
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:42:47
+Importe Total: 3.50
+
+--------------------
+Número de Mesa: 34
+Hora: 7/9/2024, 23:44:49
+Importe Total: 4.60
+
+--------------------
+Número de Mesa: 12
+Hora: 7/9/2024, 23:59:15
+Importe Total: 2.80

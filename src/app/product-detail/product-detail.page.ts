@@ -40,7 +40,7 @@ export class ProductDetailPage implements OnInit {
 
         // Si la tabla actual corresponde a uno de estos productos cargamos sus complementos
         //Estas tablas tienen limitacion en la seleccion de complementos referenciados enuna caloumna de la tabla
-        if (this.tableName === 'Helados Personalizados'||this.tableName === 'Bolleria') {
+        if (this.tableName === 'Helados Personalizados'||this.tableName === 'Bolleria'|| this.tableName === 'Batidos Helados') {
 
           this.loadComplementos(this.tableName);
           this.loadNcomplementos(this.tableName, this.product.Nombre);
@@ -79,7 +79,7 @@ export class ProductDetailPage implements OnInit {
         this.selectedComplementos = [complemento];
     }
   // En estas tablas el límite de complementos es el que se ha cargado en la tabla
-  else if (this.tableName === 'Helados Personalizados' || this.tableName === 'Bolleria') {
+  else if (this.tableName === 'Helados Personalizados' || this.tableName === 'Bolleria' || this.tableName === 'Batidos Helados') {
     const maxComplementos = this.Ncomplementos; // Número máximo de complementos permitidos
     const index = this.selectedComplementos.indexOf(complemento);
     if (index === -1) {
@@ -107,7 +107,7 @@ export class ProductDetailPage implements OnInit {
 
   }
   isComplementoDisabled(complemento: any): boolean {
-    if (this.tableName === 'Helados Personalizados' || this.tableName === 'Bolleria') {
+    if (this.tableName === 'Helados Personalizados' || this.tableName === 'Bolleria'|| this.tableName === 'Batidos Helados') {
         return this.selectedComplementos.length >= this.Ncomplementos && !this.isComplementoSelected(complemento);
     }
     return false;
