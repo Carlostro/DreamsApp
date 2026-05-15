@@ -1,0 +1,16 @@
+<div class="navigation-buttons">
+  <button [ngClass]="{'active': isActive('/'+ timestamp + '/' + code + '/heladeria')}" [routerLink]="['/', timestamp, code, 'heladeria']">
+    <ion-icon name="ice-cream-outline"></ion-icon>
+    Nuestra Heladería
+  </button>
+
+  <button [ngClass]="{'active': isActive('/'+ timestamp + '/' + code + '/kiosco')}" [routerLink]="['/', timestamp, code, 'kiosco']">
+    <ion-icon name="newspaper-outline"></ion-icon>
+    Nuestro Kiosco
+  </button>
+
+  <button [ngClass]="{'active': isActive('/'+ timestamp + '/' + code + '/rss')}" [routerLink]="['/', timestamp, code, 'rss']">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </button>
+</div>

@@ -1,0 +1,71 @@
+/* Asegúrate de que el cuerpo y el contenido llenen toda la pantalla */
+html, body, ion-app, ion-content {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ion-header {
+  height: auto; /* Ajusta la altura del header si es necesario */
+}
+
+.header-image {
+  width: 100%; /* Ajusta el ancho de la imagen del header */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block;
+}
+
+ion-header ion-title {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.image-container {
+  width: 100%;
+  max-height: 66vh; /* 👈 imagen más alta que antes, pero limitada */
+  min-height: 200px; /* 👈 asegura que no quede demasiado pequeña en pantallas pequeñas */
+  overflow: hidden;
+}
+
+.content-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* mantiene proporción y cubre todo el contenedor */ 
+  display: block;
+}
+
+
+
+.button-container {
+  background: linear-gradient(to bottom, blue, rgb(243, 11, 138));
+  padding: 12px 16px;         /* reduce espacio interno del contenedor */
+  display: flex;
+  align-items: center;         /* centra el botón verticalmente */
+  justify-content: center;     /* centra el botón horizontalmente */
+  min-height: 100px;           /* altura mínima suficiente */
+}
+
+.button-container {
+  background: linear-gradient(to bottom, blue, rgb(243, 11, 138));
+  padding: 0 16px 16px 16px;   /* padding superior reducido, solo espacio abajo y horizontal */
+  display: flex;
+  align-items: flex-end;        /* empuja el botón hacia abajo */
+  justify-content: center;      /* centra el botón horizontalmente */
+  height: auto;                 /* el contenedor solo ocupa lo necesario */
+  margin-top: 1px;             /* separa del contenedor de la imagen */
+}
+
+
+
+ion-button {
+  width: 100%; /* Ajusta el ancho del botón */
+  font-size: 20px; /* Aumenta el tamaño de la fuente */
+  padding: 25px; /* Aumenta el espaciado interno del botón para hacerlo más alto */
+  border-radius: 25px; /* Esquinas redondeadas del botón */
+}
+
+
+
+
+

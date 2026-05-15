@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cervezas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Cervezas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-item *ngFor="let item of data">
+      <ion-label class="item-label">{{ item.Nombre }}</ion-label>
+      <ion-label class="item-price">{{ item.Precio + "€" }}</ion-label>
+      <ion-button fill="clear" (click)="incrementQuantity(item)" style="font-size: 1.5em; margin-left: auto;">
+        <ion-icon name="add-circle-outline" style="font-size: 1.5em;"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button [routerLink]="['/product-heladeria']" expand="block">Volver a la Carta</ion-button>
+</ion-content>
+
+<!-- Botón en la parte inferior para abrir la lista de productos añadidos -->
+<ion-footer *ngIf="cartItems > 0">
+  <ion-toolbar>
+    <ion-button expand="block" [routerLink]="['/lista-pedido']">
+      <ion-icon name="cart-outline" slot="start"></ion-icon>
+      Ver Pedido ({{ cartItems }})
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

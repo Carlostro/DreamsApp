@@ -1,0 +1,64 @@
+/* Contenedor de cada promo */
+.promo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px; /* separa cada item */
+}
+
+/* Imagen de la promo */
+.promo-img {
+  width: 50%; /* puedes ajustar al 60% si quieres más grande */
+  height: auto;
+  border-radius: 10px; /* opcional: bordes redondeados */
+  object-fit: cover; /* asegura que la imagen no se deforme */
+}
+
+/* Nombre / etiqueta de la promo */
+
+.promo-label {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 1.4em;
+  color: #2196f3;
+  /* Mejor visibilidad en modo claro y oscuro */
+  /* Si usas variables de Ionic, puedes usar: color: var(--ion-color-primary); */
+}
+
+/* Descripción de la promo */
+.promo-description {
+  margin-top: 5px;
+  margin-left: 10px;
+  font-size: 1.1em;
+  color: #2196f3;
+  /* Mejor visibilidad en modo claro y oscuro */
+  /* Si usas variables de Ionic, puedes usar: color: var(--ion-color-primary); */
+}
+
+/* Precio */
+.promo-price {
+  margin-top: 15px; /* más cerca del botón */
+  margin-left: 60px;
+  font-weight: bold;
+  font-size: 1.6em; /* más visible */
+  color: #e91e63; /* opcional: destacar el precio */
+}
+
+/* Botón de incremento / añadir */
+.increment-button {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  max-width: 100%;
+  align-self: center;
+  font-size: 1.2em;
+  padding: 8px 0;
+  border-radius: 25px;
+  background-color: #0047ff;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  transition: none;
+}

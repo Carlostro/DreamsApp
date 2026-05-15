@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mis Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Cargando historial...</p>
+  </div>
+
+  <div *ngIf="!loading && pedidos.length === 0" class="empty-container">
+    <ion-icon name="receipt-outline" class="empty-icon"></ion-icon>
+    <h2>No hay pedidos</h2>
+    <p>Aún no has realizado ningún pedido</p>
+    <ion-button expand="block" (click)="volver()">
+      Ver Carta
+    </ion-button>
+  </div>
+
+  <ion-list *ngIf="!loading && pedidos.length > 0">
+    <ion-card *ngFor="let pedido of pedidos" class="pedido-card">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-icon name="calendar-outline"></ion-icon>
+          {{ formatearFecha(pedido.fecha) }}
+        </ion-card-subtitle>
+        <ion-card-title>
+          Pedido #{{ pedido.pedidoId }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Lista de productos -->
+        <div class="productos-list">
+          <div *ngFor="let producto of pedido.productos" class="producto-item">
+            <span class="producto-cantidad">{{ producto.cantidad }}x</span>
+            <span class="producto-nombre">{{ producto.nombre }}</span>
+            <span class="producto-precio">{{ (producto.cantidad * producto.precioUnitario).toFixed(2) }}€</span>
+
+            <!-- Complementos -->
+            <div *ngIf="producto.complementos && producto.complementos.length > 0" class="complementos">
+              <span *ngFor="let comp of producto.complementos" class="complemento-item">
+                + {{ comp.nombre }}
+                <span *ngIf="comp.precio > 0">({{ comp.precio.toFixed(2) }}€)</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="total-container">
+          <strong>Total:</strong>
+          <strong class="total-amount">{{ pedido.total }}€</strong>
+        </div>
+
+        <!-- Botón de volver a pedir (solo si no tiene canjes) -->
+        <ion-button *ngIf="!tieneCanjes(pedido)" expand="block" (click)="volverAPedir(pedido)" class="reorder-button" [disabled]="!isAccessContextValid">
+          <ion-icon name="repeat-outline" slot="start"></ion-icon>
+          Volver a Pedir
+        </ion-button>
+
+        <!-- Mensaje informativo para pedidos con canjes -->
+        <div *ngIf="tieneCanjes(pedido)" style="text-align: center; padding: 10px; color: var(--ion-color-medium); font-size: 0.9em;">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          Este pedido contiene productos canjeados y no puede repetirse automáticamente
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

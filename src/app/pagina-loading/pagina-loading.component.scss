@@ -1,0 +1,235 @@
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f7f1f1; /* Fondo blanco suave */
+  color: red;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f1f1; /* Fondo blanco suave */
+  margin-top: -20px;
+  min-height: 75vh;
+  padding: 10px 0;
+  font-size: 42px;
+  font-weight: bold;
+  color: blue;
+}
+
+/* Efecto de parpadeo en "Cargando" */
+.loading-text {
+  padding: 15px 0;
+  font-size: 36px;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Animación de los puntos */
+.loading-dots::after {
+  content: "";
+  display: inline-block;
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+  100% { content: "."; }
+}
+
+
+/* Animación de la "icono" */
+.icon {
+  width: 340px;
+  height: 300px;
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  //animation: bounce 0.5s infinite alternate;
+}
+
+//Animacion de helados gif
+.icon2 {
+  width: 70px; /* Ajusta según sea necesario */
+  height: auto;
+}
+
+.gif-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los GIFs */
+  position: relative;
+  top: -20px;
+  margin-bottom: 30px; /* Aumentado para dar más espacio */
+}
+
+.loading-contador {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.aviso-menores {
+  font-size: 24px;
+  color: red;
+  margin: 70px 10px 10px 10px;
+  padding: 0;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Estilos para los botones */
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 20px;
+  margin-top: 30px; /* Aumentado de 10px a 30px */
+  margin-bottom: 10px;
+}
+
+.gps-button-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 20px;
+  margin-top: 12px;
+}
+
+.gps-button {
+  width: 100%;
+  color: #0b1d33;
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.gps-button:disabled {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: none;
+}
+
+.action-button {
+  padding: 14px 28px;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.login-button:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.register-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.register-button:hover {
+  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
+
+.continue-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.continue-button:hover {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+}
+
+/* Contenedor global de petardos */
+.fallas-petardos-globales {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Permite interactuar con botones */
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Petardos individuales */
+.petardo-global {
+  position: absolute;
+  top: -50px; /* Empiezan fuera de la pantalla */
+  width: 80px;
+  height: auto;
+  animation-name: caePetardoZigzag;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Distribución horizontal y variaciones de velocidad y delay */
+.petardo-global:nth-child(1) { left: 5%; animation-duration: 3s; animation-delay: 0s; }
+.petardo-global:nth-child(2) { left: 15%; animation-duration: 4s; animation-delay: 0.5s; }
+.petardo-global:nth-child(3) { left: 30%; animation-duration: 3.5s; animation-delay: 1s; }
+.petardo-global:nth-child(4) { left: 45%; animation-duration: 5s; animation-delay: 1.2s; }
+.petardo-global:nth-child(5) { left: 60%; animation-duration: 4.2s; animation-delay: 0.8s; }
+.petardo-global:nth-child(6) { left: 75%; animation-duration: 3.8s; animation-delay: 1.5s; }
+.petardo-global:nth-child(7) { left: 85%; animation-duration: 4.5s; animation-delay: 0.3s; }
+
+/* Animación de caída con zigzag horizontal y rotación */
+@keyframes caePetardoZigzag {
+  0% {
+    transform: translate(0, -50px) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(20px, 25vh) rotate(45deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-15px, 50vh) rotate(90deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translate(25px, 75vh) rotate(135deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-10px, 100vh) rotate(180deg);
+    opacity: 0;
+  }
+}

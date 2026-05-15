@@ -1,0 +1,35 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Angular/Ionic app (prod)",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build",
+				"-prod"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Angular/Ionic app (prod)",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build",
+				"-prod"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		}
+	]
+}

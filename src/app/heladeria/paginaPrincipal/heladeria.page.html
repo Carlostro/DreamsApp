@@ -1,0 +1,30 @@
+<ion-content fullscreen="true" class="heladeria-content">
+  <div class="image-container">
+    <img src="assets/Dreams.jpg" class="content-image">
+  </div>
+
+  <div class="button-container">
+    <ion-button expand="block" [routerLink]="productRoute" color="light">
+      Carta Productos
+    </ion-button>
+
+    <ion-button expand="block" [routerLink]="promosRoute" color="light">
+      <ion-icon name="star" slot="start"></ion-icon>
+      Promociones
+    </ion-button>
+
+    <ion-button *ngIf="isRegisteredUser" expand="block" [routerLink]="promoPuntosRoute" color="light">
+      <ion-icon name="trophy" slot="start"></ion-icon>
+      Canjear Puntos
+    </ion-button>
+
+    <ion-button *ngIf="isRegisteredUser" expand="block" [routerLink]="misPedidosRoute" color="light">
+      <ion-icon name="receipt-outline" slot="start"></ion-icon>
+      Historial Pedidos
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-footer slot="fixed">
+  <app-navigation-buttons [activePage]="'heladeria'"></app-navigation-buttons>
+</ion-footer>

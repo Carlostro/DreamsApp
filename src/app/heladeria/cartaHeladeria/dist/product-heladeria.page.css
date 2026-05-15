@@ -1,0 +1,34 @@
+@charset "UTF-8";
+.image-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: black;
+  /* Color de fondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  /* Ajusta el ancho */
+  height: auto;
+  /* Ajusta la altura*/
+}
+
+.button-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ajusta la imagen para cubrir todo el botón sin distorsión */
+  border-radius: 15px;
+  /* Ajusta el radio del borde */
+}
+
+.centered-title {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+/*# sourceMappingURL=product-heladeria.page.css.map */

@@ -1,0 +1,63 @@
+@charset "UTF-8";
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  /* Ajusta el margen según sea necesario */
+  width: 100%;
+  /* Ocupa todo el ancho */
+}
+
+.button-container ion-button {
+  flex: 1;
+  /* Los botones ocupan todo el espacio disponible */
+  margin: 0 5px;
+  /* Espacio entre los botones */
+}
+
+.product-name {
+  font-size: 1.5em;
+  /* Ajusta el tamaño del nombre del producto */
+  font-weight: bold;
+  /* Pone el nombre en negrita */
+}
+
+.product-price {
+  font-size: 1.2em;
+  /* Ajusta el tamaño del precio */
+  margin-left: 20px;
+  /* Espacio entre el nombre y el precio */
+}
+
+.complementos-header {
+  font-size: 1.2em;
+  /* Ajusta el tamaño del texto del encabezado */
+  font-weight: bold;
+}
+
+ion-card {
+  margin-top: -10px;
+  /* Ajusta el margen superior para subir la tarjeta */
+  border: 1px solid black;
+}
+
+ion-card-title {
+  padding: 0;
+  /* Ajusta el padding superior e inferior */
+  display: flex;
+  align-items: center;
+}
+
+ion-list {
+  margin-top: -10px;
+  /* Ajusta el margen superior para subir la lista */
+}
+
+ion-button {
+  --padding-top: 2px;
+  /* Ajusta el relleno superior */
+  --padding-bottom: 2px;
+  /* Ajusta el relleno inferior */
+}
+
+/*# sourceMappingURL=product-detail.page.css.map */

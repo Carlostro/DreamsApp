@@ -1,0 +1,57 @@
+<!-- <div class="snowflakes">
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+  <div class="snowflake">❄️</div>
+</div> -->
+
+<!-- <div class="loading-container">
+     <div class="loading-animation">
+    <img src="assets/LOGO1.png" alt="Ícono" class="icon">
+     </div>
+  <p>Cargando...... </p>
+</div> -->
+
+<div class="loading-container">
+  <img src="assets/LOGO1.png" alt="Ícono" class="icon">
+  <div class="loading-text" *ngIf="!showButtons">
+    Cargando<span class="loading-dots"></span>
+  </div>
+  <div class="gif-container">
+    <img src="assets/helado1.gif" alt="Ícono" class="icon2">
+    <img src="assets/helado1.gif" alt="Ícono" class="icon2">
+  </div>
+
+  <!-- Botones que aparecen después de verificar la ubicación -->
+  <div class="buttons-container" *ngIf="showButtons">
+    <button class="action-button login-button" (click)="onLogin()">
+      Iniciar Sesión
+    </button>
+    <button class="action-button register-button" (click)="onRegister()">
+      Registrarse
+    </button>
+    <button class="action-button continue-button" (click)="onContinueWithoutRegister()">
+      Continuar sin registrar
+    </button>
+  </div>
+</div>
+
+
+<div class="aviso-menores">
+  <p>La venta de alcohol está prohibida a menores de 18 años</p>
+</div>
+
+<div class="loading-contador">
+  <div *ngIf="countdown > 0">
+    <p>Por favor, espere {{ countdown }} segundos.</p>
+  </div>
+</div>
+

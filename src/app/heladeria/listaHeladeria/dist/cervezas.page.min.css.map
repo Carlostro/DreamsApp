@@ -1,0 +1,1 @@
+{"version":3,"sources":["cervezas.page.scss"],"names":[],"mappings":"AAAA,YAEE,WAA+C","file":"cervezas.page.min.css","sourcesContent":[".item-price {\r\n  /* Alinea el precio a la derecha */\r\n  text-align: end;\r\n}\r\n"]}

@@ -1,0 +1,51 @@
+<ion-content class="login-content">
+  <div class="login-container">
+    <div class="login-header">
+      <img src="assets/LOGO1.png" alt="Logo" class="logo">
+      <h1>Iniciar Sesión</h1>
+      <p class="subtitle">Accede a tu cuenta</p>
+    </div>
+
+    <form class="login-form">
+      <div class="form-group">
+        <label for="alias">Alias</label>
+        <input
+          type="text"
+          id="alias"
+          [(ngModel)]="alias"
+          name="alias"
+          placeholder="Ingresa tu alias"
+          class="form-input"
+          autocomplete="username"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Ingresa tu contraseña"
+          class="form-input"
+          autocomplete="current-password"
+        >
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn btn-primary" (click)="onLogin()">
+          Iniciar Sesión
+        </button>
+
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+
+      <div class="register-link">
+        <p>¿No tienes cuenta? <a (click)="goToRegister()">Regístrate aquí</a></p>
+      </div>
+    </form>
+  </div>
+</ion-content>

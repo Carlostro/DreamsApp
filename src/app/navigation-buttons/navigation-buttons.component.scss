@@ -1,0 +1,31 @@
+.navigation-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  background-color: #f8f8f8; /* Color de fondo del pie de página */
+  border-top: 1px solid #e0e0e0; /* Línea superior del pie de página */
+
+  button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    //border: none;
+    padding: 5px;
+    font-size: 14px;
+    color: gray;
+    ion-icon {
+      font-size: 24px;
+      margin-bottom: 3px;
+    }
+    &.active {
+      color: green; /* Cambiar a verde */
+      ion-icon {
+        color: green; /* Cambiar a verde */
+
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+@charset "UTF-8";.button-container{display:flex;justify-content:space-between;margin-top:4px;width:100%}.button-container ion-button{flex:1;margin:0 5px}ion-card,ion-list{margin-top:-10px}.product-name{font-size:1.5em;font-weight:700}.product-price{font-size:1.2em;margin-left:20px}.complementos-header{font-size:1.2em;font-weight:700}ion-card{border:1px solid #000}ion-card-title{padding:0;display:flex;align-items:center}ion-button{--padding-top:2px;--padding-bottom:2px}
+/*# sourceMappingURL=product-detail.page.min.css.map */

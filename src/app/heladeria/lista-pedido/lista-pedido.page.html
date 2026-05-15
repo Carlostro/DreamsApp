@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Resumen de Pedido</ion-title>
+    <ion-buttons slot="end">
+      <ion-label>Mesa: {{ code }}</ion-label>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of orderList">
+      <ion-label class="product-label">
+        <h2>{{ product.Cantidad }}  X  {{ product.Nombre }}</h2>
+        <p>Precio por unidad: {{ getProductPrice(product) }}€</p>
+        <!-- Mostrar complementos si existen -->
+        <ng-container *ngIf="product.Complementos && product.Complementos.length > 0">
+          <div *ngFor="let complemento of product.Complementos; let i = index">
+            <span>{{ complemento.Nombre }}</span>
+            <br *ngIf="i < product.Complementos.length - 1">
+          </div>
+        </ng-container>
+      </ion-label>
+      <div class="price-and-buttons">
+        <p class="total-price">{{ product.Cantidad * getProductPrice(product) | number:'1.2-2' }} €</p> <!-- Precio total por producto -->
+        <div class="buttons">
+          <ion-button class="custom-button" (click)="decrementQuantity(product)">
+            <ion-icon name="remove-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="custom-button" (click)="incrementQuantity(product)">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-label>Total:</ion-label>
+      </ion-col>
+      <ion-col size="6" class="total-cost">
+        <ion-label>{{ totalCost | number:'1.2-2' }} €</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- Botones en pie de pagina-->
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" (click)="navigateToCarta()" class="footer-button">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            Carta Productos
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" (click)="navigateToHome()" class="footer-button">
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            Página Principal
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+    <!-- Boton de imprimir pedido que solo aparece si hay algun producto en la lista -->
+    <ion-toolbar *ngIf="orderList.length > 0">
+      <ion-button expand="block" (click)="printOrder()" class="footer-button" [disabled]="!isAccessContextValid || isSending">
+      <ion-icon name="print-outline" slot="start"></ion-icon>
+      Enviar Pedido
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,23 @@
+<ion-content class="ion-padding">
+  <div class="confirmation-container">
+    <div *ngIf="esUsuarioRegistrado && puntosGanados !== null" class="bravo-msg">
+      <span style="font-size:2.5rem;">👏👏</span>
+      <div style="font-size:1.3rem; font-weight:bold; color:#1e90ff;">
+        Bravo, se te han añadido <span style="color: #ff9800">{{ puntosGanados }}</span> punto{{ puntosGanados === 1 ? '' : 's' }} por tu pedido
+      </div>
+    </div>
+    <div *ngIf="!esUsuarioRegistrado && puntosPotenciales !== null && puntosPotenciales > 0" class="bravo-msg">
+      <span style="font-size:2.5rem;">😢</span>
+      <div style="font-size:1.3rem; font-weight:bold; color:#e53935;">
+        ¡Podías haber obtenido <span style="color: #ff9800">{{ puntosPotenciales }}</span> punto{{ puntosPotenciales === 1 ? '' : 's' }} con este pedido si te registras!
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <img src="../../assets/impresora.gif" alt="GIF de confirmación" style="max-width: 100%; height: auto;">
+    </div>
+    <h1>Pedido Enviado Correctamente</h1>
+  </div>
+  <ion-footer>
+      <ion-title style="text-align: center;">Desarrollado por Carlos Tro 2026</ion-title>  
+  </ion-footer>
+</ion-content>
