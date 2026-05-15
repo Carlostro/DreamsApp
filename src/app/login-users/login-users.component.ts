@@ -75,6 +75,20 @@ export class LoginUsersComponent implements OnInit, OnDestroy {
           // Crear sesión de mesa después del login exitoso
           try {
             await this.createTableSession();
+            /*
+            // --- BONIFICACIÓN DE FIDELIDAD ---
+            // Descomentar para activar la comprobación automática de puntos de fidelidad tras login
+            if (userId) {
+              this.clientesService.checkFidelidadCliente(Number(userId)).subscribe(async (bonoResp) => {
+                if (bonoResp && bonoResp.mensajes && bonoResp.mensajes.length > 0) {
+                  for (const msg of bonoResp.mensajes) {
+                    await this.showAlert('¡Fidelización!', msg);
+                  }
+                }
+              });
+            }
+            // --- FIN BONIFICACIÓN DE FIDELIDAD ---
+            */
             await loading.dismiss();
           } catch (error) {
             console.error('[LOGIN] Error al crear sesión de mesa:', error);

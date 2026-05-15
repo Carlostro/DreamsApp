@@ -1179,6 +1179,55 @@ app.post('/api/bonificaciones/descontar', async (req, res) => {
 app.get('/api/bonificaciones/historial/:cliente_id', async (req, res) => {
   const { cliente_id } = req.params;
 
+// Endpoint para comprobar y abonar puntos de fidelidad por múltiplos de 100€
+app.post('/api/bonificaciones/check-fidelidad/:cliente_id', async (req, res) => {
+  const { cliente_id } = req.params;
+  try {
+    // 1. Obtener gasto total del cliente
+    const [puntos] = await dbClientes.promise().query(
+      'SELECT gasto_total FROM vista_puntos_clientes WHERE id = ?',
+      [cliente_id]
+    );
+    const gasto_total = puntos.length > 0 ? puntos[0].gasto_total || 0 : 0;
+    const umbral = 100;
+    const max_bono = Math.floor(gasto_total / umbral);
+
+    // 2. Consultar bonificaciones de fidelidad ya abonadas
+    const [bonos] = await dbClientes.promise().query(
+      'SELECT mesa_code FROM bonificaciones WHERE cliente_id = ? AND mesa_code LIKE ? ORDER BY id',
+      [cliente_id, 'FIDELIDAD-%']
+    );
+    const abonados = bonos.map(b => parseInt((b.mesa_code || '').replace('FIDELIDAD-', ''))).filter(Number.isInteger);
+
+    // 3. Detectar nuevos umbrales alcanzados
+    let nuevosBonos = [];
+    for (let i = 1; i <= max_bono; i++) {
+      if (!abonados.includes(i * umbral)) {
+        nuevosBonos.push(i * umbral);
+      }
+    }
+
+    let mensajes = [];
+    for (const bono of nuevosBonos) {
+      // Registrar bonificación
+      await dbClientes.promise().query(
+        'INSERT INTO bonificaciones (cliente_id, mesa_code, total_ticket, puntos_acumulados, detalles) VALUES (?, ?, ?, ?, ?)',
+        [cliente_id, `FIDELIDAD-${bono}`, 0, 10, `Bonificación automática por fidelidad: ${bono}€ consumidos.`]
+      );
+      mensajes.push(`Desde el Dreams Team te agradecemos tu confianza y has sido Beneficiado con 10 puntos por tu fidelización (por superar los ${bono}€ consumidos).`);
+    }
+
+    res.json({
+      success: true,
+      nuevosBonos: nuevosBonos,
+      mensajes: mensajes
+    });
+  } catch (error) {
+    console.error('[FIDELIDAD ERROR]', error);
+    res.status(500).json({ success: false, message: 'Error al comprobar bonificaciones de fidelidad' });
+  }
+});
+
   try {
     const [bonificaciones] = await dbClientes.promise().query(
       'SELECT * FROM bonificaciones WHERE cliente_id = ? ORDER BY fecha_pedido DESC',

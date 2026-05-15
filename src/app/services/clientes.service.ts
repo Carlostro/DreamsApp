@@ -203,4 +203,11 @@ export class ClientesService {
   descontarPuntos(cliente_id: number, puntos: number, detalles?: string): Observable<any> {
     return this.http.post(`${this.bonificacionesUrl}/descontar`, { cliente_id, puntos, detalles });
   }
+
+    /**
+     * Comprobar y abonar puntos de fidelidad por múltiplos de 100€
+     */
+    checkFidelidadCliente(cliente_id: number): Observable<any> {
+      return this.http.post(`${this.bonificacionesUrl}/check-fidelidad/${cliente_id}`, {});
+    }
 }
