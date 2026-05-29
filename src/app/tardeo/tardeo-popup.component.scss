@@ -1,0 +1,17 @@
+.tardeo-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  padding: 2rem;
+  z-index: 1000;
+  text-align: center;
+}
+.popup-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}

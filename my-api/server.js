@@ -754,6 +754,36 @@ app.post('/api/active-tables/remove', (req, res) => {
 
 
 //-----------------------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------------------------
+//                              Endpoints Tardeo
+//-----------------------------------------------------------------------------------------------
+
+// Devuelve el cóctel de tardeo habilitado (solo uno)
+app.get('/api/tardeo/activo', (req, res) => {
+  // Solo devuelve el producto habilitado
+  db.query('SELECT * FROM tardeo WHERE habilitado = 1 LIMIT 1', (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error al consultar tardeo' });
+    }
+    if (results.length === 0) {
+      return res.json(null); // No hay producto activo
+    }
+    res.json(results[0]);
+  });
+});
+
+// Devuelve todos los cócteles de tardeo
+app.get('/api/tardeo', (req, res) => {
+  db.query('SELECT * FROM tardeo', (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error al consultar tardeo' });
+    }
+    res.json(results);
+  });
+});
+
+//-----------------------------------------------------------------------------------------------
 //                              Página de administrador
 //-----------------------------------------------------------------------------------------------
 

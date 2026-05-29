@@ -1,0 +1,11 @@
+<!-- Popup visual para Tardeo (no habilitado) -->
+<div *ngIf="producto" class="tardeo-popup">
+  <img [src]="producto.imagen" alt="{{producto.nombre}}" />
+  <h2>{{ producto.nombre }}</h2>
+  <p>{{ producto.descripcion }}</p>
+  <strong>{{ producto.precio | currency:'EUR' }}</strong>
+  <div class="popup-actions">
+    <button (click)="cerrar.emit()">Cerrar</button>
+    <button (click)="pedir.emit()">Pedir</button>
+  </div>
+</div>
