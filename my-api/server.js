@@ -761,7 +761,15 @@ app.post('/api/active-tables/remove', (req, res) => {
 
 // Devuelve el cóctel de tardeo habilitado (solo uno)
 app.get('/api/tardeo/activo', (req, res) => {
-  // Solo devuelve el producto habilitado
+  // Solo disponible los viernes entre las 18:00 y las 22:00
+  const ahora = new Date();
+  const diaSemana = ahora.getDay(); // 0=domingo, 5=viernes
+  const hora = ahora.getHours();
+
+  if (diaSemana !== 5 || hora < 18 || hora >= 22) {
+    return res.json(null); // Fuera del horario de tardeo
+  }
+
   db.query('SELECT * FROM Tardeo WHERE habilitado = 1 LIMIT 1', (err, results) => {
     if (err) {
       return res.status(500).json({ error: 'Error al consultar tardeo' });
