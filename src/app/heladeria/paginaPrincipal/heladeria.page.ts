@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { AppExitService } from '../../services/app-exit.service';
 import { InactivityService } from '../../services/inactivity.service';
+import { TardeoService } from '../../tardeo/tardeo.service';
+import { TardeoProduct } from '../../tardeo/tardeo.model';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-heladeria',
@@ -16,11 +20,16 @@ export class HeladeriaPage implements OnInit, OnDestroy {
   promoPuntosRoute: string | null = null;
   misPedidosRoute: string | null = null;
   isRegisteredUser: boolean = false;
+  productoTardeo: TardeoProduct | null = null;
+  mostrarPopupTardeo = false;
 
   constructor(
     private route: ActivatedRoute,
     private appExitService: AppExitService,
-    private inactivityService: InactivityService
+    private inactivityService: InactivityService,
+    private tardeoService: TardeoService,
+    private orderService: OrderService,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -48,8 +57,54 @@ export class HeladeriaPage implements OnInit, OnDestroy {
 
         // Inicializar el servicio con el número de mesa
         this.appExitService.initialize(this.code);
+
+        this.cargarTardeoActivo();
       }
     });
+  }
+
+  cargarTardeoActivo() {
+    this.tardeoService.getTardeoActivo().subscribe({
+      next: (producto) => {
+        this.productoTardeo = producto;
+        this.mostrarPopupTardeo = !!producto;
+      },
+      error: (error) => {
+        console.error('No se pudo cargar el tardeo activo', error);
+        this.mostrarPopupTardeo = false;
+      }
+    });
+  }
+
+  cerrarPopupTardeo() {
+    this.mostrarPopupTardeo = false;
+  }
+
+  async pedirTardeo() {
+    if (this.productoTardeo) {
+      this.orderService.addProduct({
+        Id: Number(this.productoTardeo.id) || 0,
+        Nombre: this.productoTardeo.nombre,
+        Precio: this.productoTardeo.precio,
+        Cantidad: 1,
+        Imagen: this.productoTardeo.imagen,
+        Descripcion: this.productoTardeo.descripcion,
+        Ncomplementos: 0,
+        Complementos: [],
+        PrecioTotal: this.productoTardeo.precio,
+        Activo: 1,
+        ComplementoActivo: 0
+      });
+    }
+    this.cerrarPopupTardeo();
+    const toast = await this.toastCtrl.create({
+      message: '¡Producto añadido al pedido correctamente!',
+      duration: 2500,
+      position: 'bottom',
+      color: 'success',
+      icon: 'checkmark-circle-outline'
+    });
+    await toast.present();
   }
 
   ngOnDestroy() {

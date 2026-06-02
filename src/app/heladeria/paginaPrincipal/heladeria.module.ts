@@ -6,6 +6,7 @@ import { HeladeriaPage } from './heladeria.page';
 import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
 import { NavigationButtonsModule } from 'src/app/navigation-buttons/navigation-buttons.module';
 import { HeladeriaPageRoutingModule } from './heladeria-routing.module';
+import { TardeoPopupComponent } from 'src/app/tardeo/tardeo-popup.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { HeladeriaPageRoutingModule } from './heladeria-routing.module';
     HeladeriaPageRoutingModule,
     NavigationButtonsModule
   ],
-  declarations: [HeladeriaPage]
+  declarations: [HeladeriaPage, TardeoPopupComponent]
 })
 export class HeladeriaPageModule {}
