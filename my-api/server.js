@@ -762,7 +762,7 @@ app.post('/api/active-tables/remove', (req, res) => {
 // Devuelve el cóctel de tardeo habilitado (solo uno)
 app.get('/api/tardeo/activo', (req, res) => {
   // Solo devuelve el producto habilitado
-  db.query('SELECT * FROM tardeo WHERE habilitado = 1 LIMIT 1', (err, results) => {
+  db.query('SELECT * FROM Tardeo WHERE habilitado = 1 LIMIT 1', (err, results) => {
     if (err) {
       return res.status(500).json({ error: 'Error al consultar tardeo' });
     }
@@ -775,7 +775,7 @@ app.get('/api/tardeo/activo', (req, res) => {
 
 // Devuelve todos los cócteles de tardeo
 app.get('/api/tardeo', (req, res) => {
-  db.query('SELECT * FROM tardeo', (err, results) => {
+  db.query('SELECT * FROM Tardeo', (err, results) => {
     if (err) {
       return res.status(500).json({ error: 'Error al consultar tardeo' });
     }

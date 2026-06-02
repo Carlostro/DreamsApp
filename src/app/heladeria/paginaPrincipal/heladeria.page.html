@@ -25,6 +25,13 @@
   </div>
 </ion-content>
 
+<app-tardeo-popup
+  *ngIf="mostrarPopupTardeo"
+  [producto]="productoTardeo"
+  (cerrar)="cerrarPopupTardeo()"
+  (pedir)="pedirTardeo()"
+></app-tardeo-popup>
+
 <ion-footer slot="fixed">
   <app-navigation-buttons [activePage]="'heladeria'"></app-navigation-buttons>
 </ion-footer>
