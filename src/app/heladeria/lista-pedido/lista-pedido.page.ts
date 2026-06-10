@@ -303,13 +303,14 @@ export class ListaPedidoPage implements OnInit, OnDestroy {
     conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA);
     conector.EstablecerTamañoFuente(1, 1);
     conector.EscribirTexto("----------------------------------------\n");
-
     conector.EscribirTexto("\n");
     conector.EscribirTexto("\n");
-    conector.EscribirTexto("\n");
-    conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+    conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO);
     conector.EstablecerTamañoFuente(1, 1);
     conector.EscribirTexto(`CODIGO ACCESO SERVICIOS: ${codigoFecha}#\n`);
+    conector.Feed(1);
+    conector.CargarImagenLocalEImprimir("C:/Users/Dreams/Pictures/QR.png", 0, 0);
+    conector.Feed(1);
     conector.EscribirTexto("Gracias por su visita\n");
     conector.Corte(80);
 

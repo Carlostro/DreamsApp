@@ -83,15 +83,15 @@ export class HeladeriaPage implements OnInit, OnDestroy {
   async pedirTardeo() {
     if (this.productoTardeo) {
       this.orderService.addProduct({
-        Id: Number(this.productoTardeo.id) || 0,
-        Nombre: this.productoTardeo.nombre,
-        Precio: this.productoTardeo.precio,
+        Id: Number(this.productoTardeo.Id) || 0,
+        Nombre: this.productoTardeo.Nombre,
+        Precio: this.productoTardeo.Precio,
         Cantidad: 1,
-        Imagen: this.productoTardeo.imagen,
-        Descripcion: this.productoTardeo.descripcion,
+        Imagen: this.productoTardeo.Imagen,
+        Descripcion: this.productoTardeo.Descripcion,
         Ncomplementos: 0,
         Complementos: [],
-        PrecioTotal: this.productoTardeo.precio,
+        PrecioTotal: this.productoTardeo.Precio,
         Activo: 1,
         ComplementoActivo: 0
       });
