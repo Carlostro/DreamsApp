@@ -760,16 +760,8 @@ app.post('/api/active-tables/remove', (req, res) => {
 //-----------------------------------------------------------------------------------------------
 
 // Devuelve el cóctel de tardeo habilitado (solo uno)
+// Si tiene FechaInicio/HoraInicio y FechaFin/HoraFin configurados, comprueba que la fecha/hora actual esté dentro del rango
 app.get('/api/tardeo/activo', (req, res) => {
-  // Solo disponible los viernes entre las 18:00 y las 22:00
-  const ahora = new Date();
-  const diaSemana = ahora.getDay(); // 0=domingo, 5=viernes
-  const hora = ahora.getHours();
-
-  if (diaSemana !== 5 || hora < 19 || hora >= 22) {
-    return res.json(null); // Fuera del horario de tardeo
-  }
-
   db.query('SELECT * FROM Tardeo WHERE Habilitado = 1 LIMIT 1', (err, results) => {
     if (err) {
       return res.status(500).json({ error: 'Error al consultar tardeo' });
@@ -777,7 +769,37 @@ app.get('/api/tardeo/activo', (req, res) => {
     if (results.length === 0) {
       return res.json(null); // No hay producto activo
     }
-    res.json(results[0]);
+
+    const producto = results[0];
+    const { FechaInicio, HoraInicio, FechaFin, HoraFin } = producto;
+
+    // Si tiene rango configurado, comprobar que la fecha/hora actual esté dentro
+    if (FechaInicio && HoraInicio && FechaFin && HoraFin) {
+      const ahora = new Date();
+
+      // Usar hora LOCAL del servidor para obtener la fecha correcta del calendario
+      const toDateStr = val => {
+        const d = val instanceof Date ? val : new Date(val);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth()+1).padStart(2,'0');
+        const dd = String(d.getDate()).padStart(2,'0');
+        return `${yyyy}-${mm}-${dd}`;
+      };
+
+      const inicioStr = `${toDateStr(FechaInicio)}T${String(HoraInicio).substring(0, 8)}`;
+      const finStr    = `${toDateStr(FechaFin)}T${String(HoraFin).substring(0, 8)}`;
+
+      const pad = n => String(n).padStart(2, '0');
+      const ahoraStr = `${ahora.getFullYear()}-${pad(ahora.getMonth()+1)}-${pad(ahora.getDate())}T${pad(ahora.getHours())}:${pad(ahora.getMinutes())}:${pad(ahora.getSeconds())}`;
+
+      console.log(`[TARDEO] ahora=${ahoraStr} | inicio=${inicioStr} | fin=${finStr}`);
+
+      if (ahoraStr < inicioStr || ahoraStr > finStr) {
+        return res.json(null); // Fuera del rango configurado
+      }
+    }
+
+    res.json(producto);
   });
 });
 
