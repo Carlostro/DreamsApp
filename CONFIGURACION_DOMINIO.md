@@ -80,7 +80,19 @@ Los archivos de entorno ya están configurados en:
 - `src/environments/environment.ts` (desarrollo)
 - `src/environments/environment.prod.ts` (producción)
 
-Si necesitas cambiar el dominio, edita estos archivos.
+Ambos usan **rutas relativas** (`apiUrl: '/api'`), por lo que el frontend llama a la API
+en el mismo origen desde el que se sirve la página. El proxy de `server-frontend.js`
+reenvía `/api` al backend del puerto 3000.
+
+Esto permite que la app funcione sin cambios tanto en acceso local
+(`http://192.168.88.251`) como a través del dominio público
+(`https://pedidos.cafeteriadreams.com`), sin depender de que el dominio resuelva a una
+IP concreta. **No pongas el dominio absoluto en `apiUrl`**: si el DNS local apunta el
+dominio al servidor, el navegador intentaría usar HTTPS en el puerto 443 y las llamadas
+fallarían con `ERR_CONNECTION_REFUSED`.
+
+`printerPluginUrl` sí mantiene una URL absoluta porque el plugin de impresión solo es
+accesible dentro de la red local.
 
 ### 2. Instalar dependencias
 
