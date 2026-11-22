@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule } from './shared/ionic.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -52,4 +53,3 @@ import { ClientesService } from './services/clientes.service';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-

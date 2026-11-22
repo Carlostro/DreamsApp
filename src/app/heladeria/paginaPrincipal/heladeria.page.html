@@ -13,24 +13,29 @@
       Promociones
     </ion-button>
 
-    <ion-button *ngIf="isRegisteredUser" expand="block" [routerLink]="promoPuntosRoute" color="light">
-      <ion-icon name="trophy" slot="start"></ion-icon>
-      Canjear Puntos
-    </ion-button>
+    @if (isRegisteredUser) {
+      <ion-button expand="block" [routerLink]="promoPuntosRoute" color="light">
+        <ion-icon name="trophy" slot="start"></ion-icon>
+        Canjear Puntos
+      </ion-button>
+    }
 
-    <ion-button *ngIf="isRegisteredUser" expand="block" [routerLink]="misPedidosRoute" color="light">
-      <ion-icon name="receipt-outline" slot="start"></ion-icon>
-      Historial Pedidos
-    </ion-button>
+    @if (isRegisteredUser) {
+      <ion-button expand="block" [routerLink]="misPedidosRoute" color="light">
+        <ion-icon name="receipt-outline" slot="start"></ion-icon>
+        Historial Pedidos
+      </ion-button>
+    }
   </div>
 </ion-content>
 
-<app-tardeo-popup
-  *ngIf="mostrarPopupTardeo"
-  [producto]="productoTardeo"
-  (cerrar)="cerrarPopupTardeo()"
-  (pedir)="pedirTardeo()"
-></app-tardeo-popup>
+@if (mostrarPopupTardeo) {
+  <app-tardeo-popup
+    [producto]="productoTardeo"
+    (cerrar)="cerrarPopupTardeo()"
+    (pedir)="pedirTardeo()"
+  ></app-tardeo-popup>
+}
 
 <ion-footer slot="fixed">
   <app-navigation-buttons [activePage]="'heladeria'"></app-navigation-buttons>

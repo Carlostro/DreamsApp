@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model'; // Importar la interfaz Product
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,9 +7,11 @@ import { AppExitService } from '../../services/app-exit.service';
 
 
 @Component({
-  selector: 'app-listaheladeria',
-  templateUrl: './listaHeladeria.page.html',
-  styleUrls: ['./listaHeladeria.page.scss'],
+    selector: 'app-listaheladeria',
+    templateUrl: './listaHeladeria.page.html',
+    styleUrls: ['./listaHeladeria.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ListaHeladeriaPage implements OnInit, OnDestroy {
   data: Product[] = [];

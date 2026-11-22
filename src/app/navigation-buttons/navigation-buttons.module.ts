@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationButtonsComponent } from './navigation-buttons.component';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from 'src/app/shared/ionic.module';
 
 @NgModule({
   declarations: [NavigationButtonsComponent],
@@ -15,4 +15,3 @@ import { IonicModule } from '@ionic/angular';
   schemas: [CUSTOM_ELEMENTS_SCHEMA] // Agregar CUSTOM_ELEMENTS_SCHEMA
 })
 export class NavigationButtonsModule {}
-

@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router,NavigationEnd } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { AppExitService } from '../../services/app-exit.service';
 import { InactivityService } from '../../services/inactivity.service';
 
 @Component({
-  selector: 'app-product-kiosco',
-  templateUrl: './product-kiosco.page.html',
-  styleUrls: ['./product-kiosco.page.scss'],
+    selector: 'app-product-kiosco',
+    templateUrl: './product-kiosco.page.html',
+    styleUrls: ['./product-kiosco.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ProductKioscoPage implements OnInit, OnDestroy {
   pageTitle: string = '';

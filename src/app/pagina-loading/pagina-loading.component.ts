@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 // Utilidades para detectar navegadores
 function isSafari() {
   const ua = window.navigator.userAgent;
@@ -30,9 +30,11 @@ import { AppExitService } from '../services/app-exit.service';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-pagina-loading',
-  templateUrl: './pagina-loading.component.html',
-  styleUrls: ['./pagina-loading.component.scss']
+    selector: 'app-pagina-loading',
+    templateUrl: './pagina-loading.component.html',
+    styleUrls: ['./pagina-loading.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class PaginaLoadingComponent implements OnInit, OnDestroy {
     // GPS desactivado completamente para pruebas

@@ -6,19 +6,21 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let item of data; trackBy: trackByFn" style="margin-bottom: 15px;" (click)=" viewProductDetail(item)">
-      <ion-img [src]="item.Imagen" class="item-img" loading="lazy"></ion-img>
-      <ion-label>
-        <div class="item-label">{{ item.Nombre }}</div>
-        <div class="item-description">{{ item.Descripcion }}</div>
-      </ion-label>
-      <div class="item-price-button">
-        <div class="item-price">{{ item.Precio + "€" }}</div>
-        <ion-button fill="clear" (click)="incrementQuantity(item)" class="increment-button" [disabled]="isTableAllowedForDetails() || item.ComplementoActivo == 1">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-button>
-      </div>
-    </ion-item>
+    @for (item of data; track trackByFn($index, item)) {
+      <ion-item style="margin-bottom: 15px;" (click)=" viewProductDetail(item)">
+        <ion-img [src]="item.Imagen" class="item-img" loading="lazy"></ion-img>
+        <ion-label>
+          <div class="item-label">{{ item.Nombre }}</div>
+          <div class="item-description">{{ item.Descripcion }}</div>
+        </ion-label>
+        <div class="item-price-button">
+          <div class="item-price">{{ item.Precio + "€" }}</div>
+          <ion-button fill="clear" (click)="incrementQuantity(item)" class="increment-button" [disabled]="isTableAllowedForDetails() || item.ComplementoActivo == 1">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+    }
   </ion-list>
 </ion-content>
 
@@ -29,10 +31,12 @@
       Volver a la Carta
     </ion-button>
   </ion-toolbar>
-  <ion-toolbar *ngIf="cartItems > 0">
-    <ion-button expand="block" [routerLink]="['/',timestamp, code, 'lista-pedido']" style="font-size: 18px;">
-      <ion-icon name="cart-outline" slot="start"></ion-icon>
-      Ver Pedido ({{ cartItems }})
-    </ion-button>
-  </ion-toolbar>
+  @if (cartItems > 0) {
+    <ion-toolbar>
+      <ion-button expand="block" [routerLink]="['/',timestamp, code, 'lista-pedido']" style="font-size: 18px;">
+        <ion-icon name="cart-outline" slot="start"></ion-icon>
+        Ver Pedido ({{ cartItems }})
+      </ion-button>
+    </ion-toolbar>
+  }
 </ion-footer>

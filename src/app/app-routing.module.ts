@@ -95,7 +95,7 @@ const routes: Routes = [
     loadChildren: () => import('./heladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {
-    path: ':timestamp/:code/frappelatte',
+    path: ':timestamp/:code/pinsas',
     loadChildren: () => import('./heladeria/listaHeladeria/listaHeladeria.module').then(m => m.ListaHeladeriaPageModule)
   },
   {

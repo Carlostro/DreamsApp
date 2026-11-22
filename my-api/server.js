@@ -1,5 +1,5 @@
 // Cargar variables de entorno
-require('dotenv').config();
+require('dotenv').config({ path: process.env.DOTENV_CONFIG_PATH || '.env' });
 
 const express = require("express");
 const fs = require('fs');
@@ -359,6 +359,7 @@ dbClientes.query('SELECT 1', (err) => {
 
 //---------------------------------------------------------------------------------------------
 app.post('/api/tickets', (req, res) => {
+ console.log('[IMPRIMIR TICKET] POST /api/tickets recibido de:', req.ip, '- Hora:', new Date().toLocaleString());
   const { pedidoId, detalles, total, cliente_id } = req.body;
 
   if (!pedidoId || !detalles || !total) {
@@ -758,61 +759,97 @@ app.post('/api/active-tables/remove', (req, res) => {
 //-----------------------------------------------------------------------------------------------
 //                              Endpoints Tardeo
 //-----------------------------------------------------------------------------------------------
-
-// Devuelve el cóctel de tardeo habilitado (solo uno)
-// Si tiene FechaInicio/HoraInicio y FechaFin/HoraFin configurados, comprueba que la fecha/hora actual esté dentro del rango
+// Devuelve el cóctel de tardeo habilitado que corresponde
+// a la fecha y hora actuales
 app.get('/api/tardeo/activo', (req, res) => {
-  db.query('SELECT * FROM Tardeo WHERE Habilitado = 1 LIMIT 1', (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error al consultar tardeo' });
-    }
-    if (results.length === 0) {
-      return res.json(null); // No hay producto activo
-    }
+  db.query(
+    'SELECT * FROM Tardeo WHERE Habilitado = 1',
+    (err, results) => {
 
-    const producto = results[0];
-    const { FechaInicio, HoraInicio, FechaFin, HoraFin } = producto;
+      if (err) {
+        return res.status(500).json({
+          error: 'Error al consultar tardeo'
+        });
+      }
 
-    // Si tiene rango configurado, comprobar que la fecha/hora actual esté dentro
-    if (FechaInicio && HoraInicio && FechaFin && HoraFin) {
+      if (results.length === 0) {
+        return res.json(null); // No hay productos habilitados
+      }
+
       const ahora = new Date();
 
-      // Usar hora LOCAL del servidor para obtener la fecha correcta del calendario
+      // Usar hora LOCAL del servidor
+      const pad = n => String(n).padStart(2, '0');
+
+      const ahoraStr =
+        `${ahora.getFullYear()}-` +
+        `${pad(ahora.getMonth() + 1)}-` +
+        `${pad(ahora.getDate())}T` +
+        `${pad(ahora.getHours())}:` +
+        `${pad(ahora.getMinutes())}:` +
+        `${pad(ahora.getSeconds())}`;
+
       const toDateStr = val => {
         const d = val instanceof Date ? val : new Date(val);
+
         const yyyy = d.getFullYear();
-        const mm = String(d.getMonth()+1).padStart(2,'0');
-        const dd = String(d.getDate()).padStart(2,'0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+
         return `${yyyy}-${mm}-${dd}`;
       };
 
-      const inicioStr = `${toDateStr(FechaInicio)}T${String(HoraInicio).substring(0, 8)}`;
-      const finStr    = `${toDateStr(FechaFin)}T${String(HoraFin).substring(0, 8)}`;
+      // Buscar la promoción que corresponde actualmente
+      const activo = results.find(producto => {
 
-      const pad = n => String(n).padStart(2, '0');
-      const ahoraStr = `${ahora.getFullYear()}-${pad(ahora.getMonth()+1)}-${pad(ahora.getDate())}T${pad(ahora.getHours())}:${pad(ahora.getMinutes())}:${pad(ahora.getSeconds())}`;
+        const {
+          FechaInicio,
+          HoraInicio,
+          FechaFin,
+          HoraFin
+        } = producto;
 
-      console.log(`[TARDEO] ahora=${ahoraStr} | inicio=${inicioStr} | fin=${finStr}`);
+        // Si no tiene rango configurado,
+        // al estar habilitada se considera activa
+        if (!FechaInicio || !HoraInicio || !FechaFin || !HoraFin) {
+          return true;
+        }
 
-      if (ahoraStr < inicioStr || ahoraStr > finStr) {
-        return res.json(null); // Fuera del rango configurado
+        const inicioStr =
+          `${toDateStr(FechaInicio)}T${String(HoraInicio).substring(0, 8)}`;
+
+        const finStr =
+          `${toDateStr(FechaFin)}T${String(HoraFin).substring(0, 8)}`;
+
+        // Comprobar si ahora está dentro del rango
+        return ahoraStr >= inicioStr && ahoraStr <= finStr;
+      });
+
+      // No hay ninguna promoción activa en este momento
+      if (!activo) {
+        return res.json(null);
       }
-    }
 
-    res.json(producto);
-  });
+      // Devolver la promoción correspondiente
+      res.json(activo);
+    }
+  );
 });
+
 
 // Devuelve todos los cócteles de tardeo
 app.get('/api/tardeo', (req, res) => {
   db.query('SELECT * FROM Tardeo', (err, results) => {
+
     if (err) {
-      return res.status(500).json({ error: 'Error al consultar tardeo' });
+      return res.status(500).json({
+        error: 'Error al consultar tardeo'
+      });
     }
+
     res.json(results);
   });
 });
-
 //-----------------------------------------------------------------------------------------------
 //                              Página de administrador
 //-----------------------------------------------------------------------------------------------
@@ -914,7 +951,7 @@ app.post('/api/printer-proxy', async (req, res) => {
     });
   }
 
-  console.log(`[PRINTER PROXY] POST ${targetUrl}`);
+  //console.log(`[PRINTER PROXY] POST ${targetUrl}`);
 
   try {
     const url = new URL(targetUrl);

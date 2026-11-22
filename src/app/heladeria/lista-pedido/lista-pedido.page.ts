@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model';
 import { HttpClient } from '@angular/common/http';
@@ -12,9 +12,11 @@ import { InactivityService } from '../../services/inactivity.service';
 import { AppExitService } from '../../services/app-exit.service';
 
 @Component({
-  selector: 'app-lista-pedido',
-  templateUrl: './lista-pedido.page.html',
-  styleUrls: ['./lista-pedido.page.scss'],
+    selector: 'app-lista-pedido',
+    templateUrl: './lista-pedido.page.html',
+    styleUrls: ['./lista-pedido.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ListaPedidoPage implements OnInit, OnDestroy {
   private readonly ACCESS_EXPIRATION_MS = 10 * 60 * 1000;
@@ -175,7 +177,6 @@ export class ListaPedidoPage implements OnInit, OnDestroy {
 
     conector
       .Iniciar()
-      .Corte(0)
       .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
       .Feed(1)
       //.CargarImagenLocalEImprimir("C:/Users/User/Desktop/DreamsApp/src/assets/logo ticket.png", 0, 0)
@@ -306,13 +307,13 @@ export class ListaPedidoPage implements OnInit, OnDestroy {
     conector.EscribirTexto("\n");
     conector.EscribirTexto("\n");
     conector.EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO);
-    conector.EstablecerTamañoFuente(1, 1);
-    conector.EscribirTexto(`CODIGO ACCESO SERVICIOS: ${codigoFecha}#\n`);
+    conector.EstablecerTamañoFuente(1, 2);
+    conector.EscribirTexto(`CODIGO QR ACCESO SERVICIOS\n`);
     conector.Feed(1);
     conector.CargarImagenLocalEImprimir("C:/Users/Dreams/Pictures/QR.png", 0, 0);
     conector.Feed(1);
     conector.EscribirTexto("Gracias por su visita\n");
-    conector.Corte(80);
+    conector.Corte(5);
 
 
     try {

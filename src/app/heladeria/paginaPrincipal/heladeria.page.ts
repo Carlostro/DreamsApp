@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AppExitService } from '../../services/app-exit.service';
@@ -8,9 +8,11 @@ import { TardeoProduct } from '../../tardeo/tardeo.model';
 import { OrderService } from '../../services/order.service';
 
 @Component({
-  selector: 'app-heladeria',
-  templateUrl: './heladeria.page.html',
-  styleUrls: ['./heladeria.page.scss'],
+    selector: 'app-heladeria',
+    templateUrl: './heladeria.page.html',
+    styleUrls: ['./heladeria.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class HeladeriaPage implements OnInit, OnDestroy {
   code: string | null = null;

@@ -41,6 +41,7 @@ yarn-error.log
 .env.*.local
 my-api/.env
 my-api/.env.local
+my-api/.env.test
 
 # Certificados SSL - NO subir al repositorio
 certs/*.key

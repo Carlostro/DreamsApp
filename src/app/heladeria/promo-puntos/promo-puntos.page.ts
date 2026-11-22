@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,9 +7,11 @@ import { AlertController } from '@ionic/angular';
 import { InactivityService } from '../../services/inactivity.service';
 
 @Component({
-  selector: 'app-promo-puntos',
-  templateUrl: './promo-puntos.page.html',
-  styleUrls: ['./promo-puntos.page.scss'],
+    selector: 'app-promo-puntos',
+    templateUrl: './promo-puntos.page.html',
+    styleUrls: ['./promo-puntos.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class PromoPuntosPage implements OnInit, OnDestroy {
 

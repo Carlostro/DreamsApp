@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navigation-buttons',
-  templateUrl: './navigation-buttons.component.html',
-  styleUrls: ['./navigation-buttons.component.scss']
+    selector: 'app-navigation-buttons',
+    templateUrl: './navigation-buttons.component.html',
+    styleUrls: ['./navigation-buttons.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class NavigationButtonsComponent implements OnInit {
   @Input() activePage: string = '';

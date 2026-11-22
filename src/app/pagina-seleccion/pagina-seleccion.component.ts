@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppExitService } from '../services/app-exit.service';
 import { InactivityService } from '../services/inactivity.service';
 
 @Component({
-  selector: 'app-pagina-seleccion',
-  templateUrl: './pagina-seleccion.component.html',
-  styleUrls: ['./pagina-seleccion.component.scss'],
+    selector: 'app-pagina-seleccion',
+    templateUrl: './pagina-seleccion.component.html',
+    styleUrls: ['./pagina-seleccion.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class PaginaSeleccionComponent implements OnInit, OnDestroy {
   code: string | null = null;

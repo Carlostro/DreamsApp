@@ -1,11 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InactivityService } from '../services/inactivity.service';
 import { AppExitService } from '../services/app-exit.service';
 @Component({
-  selector: 'app-rss',
-  templateUrl: './rss.page.html',
-  styleUrls: ['./rss.page.scss'],
+    selector: 'app-rss',
+    templateUrl: './rss.page.html',
+    styleUrls: ['./rss.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RssPage implements OnInit, OnDestroy {
   code: string | null = null;

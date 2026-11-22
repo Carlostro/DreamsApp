@@ -2,9 +2,11 @@
 
 <div class="loading-container">
   <img src="/assets/icon/loading.gif" alt="Ícono" class="icon">
-  <div class="loading-text" *ngIf="!showButtons">
-    Cargando<span class="loading-dots"></span>
-  </div>
+  @if (!showButtons) {
+    <div class="loading-text">
+      Cargando<span class="loading-dots"></span>
+    </div>
+  }
 
   <!--
   <div class="gps-button-container" *ngIf="!showButtons && showActivateGpsButton">
@@ -17,17 +19,19 @@
 
 
   <!-- Botones que aparecen después de verificar la ubicación -->
-  <div class="buttons-container" *ngIf="showButtons">
-    <button class="action-button login-button" (click)="onLogin()">
-      Iniciar Sesión
-    </button>
-    <button class="action-button register-button" (click)="onRegister()">
-      Registrarse
-    </button>
-    <button class="action-button continue-button" (click)="onContinueWithoutRegister()">
-      Continuar sin registrar
-    </button>
-  </div>
+  @if (showButtons) {
+    <div class="buttons-container">
+      <button class="action-button login-button" (click)="onLogin()">
+        Iniciar Sesión
+      </button>
+      <button class="action-button register-button" (click)="onRegister()">
+        Registrarse
+      </button>
+      <button class="action-button continue-button" (click)="onContinueWithoutRegister()">
+        Continuar sin registrar
+      </button>
+    </div>
+  }
 </div>
 
 <!--
@@ -47,8 +51,10 @@
 </div>
 
 <div class="loading-contador">
-  <div *ngIf="countdown > 0">
-    <p>Por favor, espere {{ countdown }} segundos.</p>
-  </div>
+  @if (countdown > 0) {
+    <div>
+      <p>Por favor, espere {{ countdown }} segundos.</p>
+    </div>
+  }
 </div>
 

@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'app-pedido-enviado',
-  templateUrl: './pedido-enviado.component.html',
-  styleUrls: ['./pedido-enviado.component.scss'],
+    selector: 'app-pedido-enviado',
+    templateUrl: './pedido-enviado.component.html',
+    styleUrls: ['./pedido-enviado.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class PedidoEnviadoComponent implements OnInit, OnDestroy {
   code: string = '';

@@ -224,7 +224,11 @@ const ConectorPluginV3 = (() => {
                 throw new Error(`Error en printer-proxy: ${response.status} ${response.statusText}`);
             }
 
-            return await response.json();
+            const jsonResponse = await response.json();
+            if (jsonResponse !== true) {
+                throw new Error(`Error en la respuesta del plugin: ${JSON.stringify(jsonResponse)}`);
+            }
+            return jsonResponse;
         }
 
         async imprimirEn(nombreImpresora: string) {

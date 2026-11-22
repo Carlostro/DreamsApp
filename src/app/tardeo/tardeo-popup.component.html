@@ -1,16 +1,18 @@
-<div *ngIf="producto" class="tardeo-popup-overlay" (click)="cerrar.emit()">
-  <div class="tardeo-popup" (click)="$event.stopPropagation()">
-    <div class="tardeo-header">
-      <span class="tardeo-header-line1">Promoción</span>
-      <span class="tardeo-header-line2">Tardeo</span>
-    </div>
-    <img [src]="producto.Imagen" alt="{{ producto.Nombre }}" />
-    <h2>{{ producto.Nombre }}</h2>
-    <p>{{ producto.Descripcion }}</p>
-    <strong>{{ producto.Precio | currency:'EUR' }}</strong>
-    <div class="popup-actions">
-      <button type="button" (click)="cerrar.emit()">Cerrar</button>
-      <button type="button" (click)="pedir.emit()">Pedir</button>
+@if (producto) {
+  <div class="tardeo-popup-overlay" (click)="cerrar.emit()">
+    <div class="tardeo-popup" (click)="$event.stopPropagation()">
+      <div class="tardeo-header">
+        <span class="tardeo-header-line1">Promoción</span>
+        <!--<span class="tardeo-header-line2">Tardeo</span>-->
+      </div>
+      <img [src]="producto.Imagen" alt="{{ producto.Nombre }}" />
+      <h2>{{ producto.Nombre }}</h2>
+      <p>{{ producto.Descripcion }}</p>
+      <strong>{{ producto.Precio | currency:'EUR' }}</strong>
+      <div class="popup-actions">
+        <button type="button" (click)="cerrar.emit()">Cerrar</button>
+        <button type="button" (click)="pedir.emit()">Pedir</button>
+      </div>
     </div>
   </div>
-</div>
+}

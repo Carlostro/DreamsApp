@@ -16,13 +16,25 @@
   margin-bottom: 0.4rem;
   line-height: 1.05;
 }
-
+/*
 .tardeo-header-line1 {
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #888;
+}
+*/
+
+.tardeo-header-line1 {
+  font-size: 2.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #0047ff, #e03030);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tardeo-header-line2 {

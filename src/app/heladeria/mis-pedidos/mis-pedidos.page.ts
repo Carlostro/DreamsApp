@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { TicketsService } from '../../services/tickets.service';
@@ -15,9 +15,11 @@ interface TicketHistorial {
 }
 
 @Component({
-  selector: 'app-mis-pedidos',
-  templateUrl: './mis-pedidos.page.html',
-  styleUrls: ['./mis-pedidos.page.scss'],
+    selector: 'app-mis-pedidos',
+    templateUrl: './mis-pedidos.page.html',
+    styleUrls: ['./mis-pedidos.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class MisPedidosPage implements OnInit, OnDestroy {
   private readonly ACCESS_EXPIRATION_MS = 5 * 60 * 1000;

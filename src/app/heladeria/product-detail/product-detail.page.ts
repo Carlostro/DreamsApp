@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { ComplementoService } from '../../services/complemento.service';
@@ -9,9 +9,11 @@ import { InactivityService } from '../../services/inactivity.service';
 import { AppExitService } from '../../services/app-exit.service';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.page.html',
-  styleUrls: ['./product-detail.page.scss'],
+    selector: 'app-product-detail',
+    templateUrl: './product-detail.page.html',
+    styleUrls: ['./product-detail.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ProductDetailPage implements OnInit, OnDestroy {
   product: Product | undefined;
@@ -213,7 +215,7 @@ export class ProductDetailPage implements OnInit, OnDestroy {
         'Copas Helado': 'copas-helado',
         'Granizados': 'granizados',
         'Chocolates': 'chocolates',
-        'Frappelatte': 'frappelatte',
+        'Pinsa': 'pinsas',
         'Smoothies': 'smoothies',
         'Zumos': 'zumos',
         // Agrega aquí más equivalencias si tienes más tablas

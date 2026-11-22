@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model'; // Importar la interfaz Product
 import { ActivatedRoute ,Router} from '@angular/router';
@@ -7,9 +7,11 @@ import { InactivityService } from '../../services/inactivity.service';
 import { AppExitService } from '../../services/app-exit.service';
 
 @Component({
-  selector: 'app-listakiosco',
-  templateUrl: './listaKiosco.page.html',
-  styleUrls: ['./listaKiosco.page.scss'],
+    selector: 'app-listakiosco',
+    templateUrl: './listaKiosco.page.html',
+    styleUrls: ['./listaKiosco.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ListaKioscoPage implements OnInit, OnDestroy {
 

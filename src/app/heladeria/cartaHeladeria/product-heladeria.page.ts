@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router,NavigationEnd } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { AppExitService } from '../../services/app-exit.service';
 import { InactivityService } from '../../services/inactivity.service';
 
 @Component({
-  selector: 'app-product-heladeria',
-  templateUrl: './product-heladeria.page.html',
-  styleUrls: ['./product-heladeria.page.scss'],
+    selector: 'app-product-heladeria',
+    templateUrl: './product-heladeria.page.html',
+    styleUrls: ['./product-heladeria.page.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ProductHeladeriaPage implements OnInit, OnDestroy {
   pageTitle: string = '';
@@ -88,7 +90,7 @@ export class ProductHeladeriaPage implements OnInit, OnDestroy {
       'vinos': 'Vinos',
       'cafe': 'Café',
       'bolleria': 'Bollería',
-      'frappelatte': 'Frappelatte',
+      'pinsa': 'Pinsa',
       'infusiones': 'Infusiones',
       'chocolates': 'Chocolates',
       'chupitos': 'Chupitos',

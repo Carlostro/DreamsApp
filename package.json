@@ -1,9 +1,12 @@
 {
   "name": "dreamsapp",
   "version": "1.0.0",
+  "engines": {
+    "node": "^22.22.3"
+  },
   "main": "karma.conf.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ng test --watch=false --browsers=ChromeHeadless --configuration=ci",
     "start:frontend": "node server-frontend.js",
     "start:api": "cd my-api && node server.js",
     "build": "ionic build --prod",
@@ -14,28 +17,36 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@angular-eslint/builder": "^18.3.0",
-    "@angular/animations": "^18.2.0",
-    "@angular/cli": "^18.2.0",
-    "@angular/common": "^18.2.0",
-    "@angular/compiler": "^18.2.0",
-    "@angular/compiler-cli": "^18.2.0",
-    "@angular/core": "^18.2.0",
-    "@angular/forms": "^18.2.0",
-    "@angular/platform-browser": "^18.2.0",
-    "@angular/platform-browser-dynamic": "^18.2.0",
-    "@ionic/angular": "^8.2.7",
-    "@nx/angular": "22.2.7",
-    "dotenv": "^17.2.3",
+    "@angular-eslint/builder": "22.8.0",
+    "@angular/animations": "22.3.0",
+    "@angular/cli": "22.3.0",
+    "@angular/common": "22.3.0",
+    "@angular/compiler": "22.3.0",
+    "@angular/compiler-cli": "22.3.0",
+    "@angular/core": "22.3.0",
+    "@angular/forms": "22.3.0",
+    "@angular/platform-browser": "22.3.0",
+    "@angular/platform-browser-dynamic": "22.3.0",
+    "@angular/router": "22.3.0",
+    "@ionic/angular": "9.0.13",
+    "dotenv": "18.0.10",
     "dreamsapp": "file:",
     "express": "^5.2.1",
-    "mysql2": "^3.16.2"
+    "mysql2": "^3.16.2",
+    "rxjs": "^7.8.2",
+    "zone.js": "~0.16.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.0",
-    "@ionic/angular-toolkit": "^11.0.1",
-    "@nx/workspace": "22.2.7",
-    "nx": "22.2.7",
-    "typescript": "^5.4.0"
+    "@angular/build": "22.3.0",
+    "@ionic/angular-toolkit": "13.0.0",
+    "@types/jasmine": "^5.1.15",
+    "istanbul-lib-instrument": "^6.0.3",
+    "jasmine-core": "^5.13.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.3.0",
+    "typescript": "^6.0.3"
   }
 }

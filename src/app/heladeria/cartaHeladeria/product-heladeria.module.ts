@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from 'src/app/shared/ionic.module';
 
 import { ProductHeladeriaPageRoutingModule } from './product-heladeria-routing.module';
 

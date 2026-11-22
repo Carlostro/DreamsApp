@@ -12,15 +12,17 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let promo of promosPuntos; trackBy: trackByFn" style="margin-bottom: 15px;" class="promo-item">
-      <ion-img [src]="promo.Imagen" class="promo-img" loading="lazy"></ion-img>
-      <ion-label>
-        <div class="promo-label">{{ promo.Nombre }}</div>
-        <div class="promo-description">{{ promo.Descripcion }}</div>
-        <div class="promo-puntos">{{ promo.PuntosNecesarios }} puntos</div>
-        <ion-button expand="block" (click)="canjearPuntos(promo)" class="canjear-button">Canjear</ion-button>
-      </ion-label>
-    </ion-item>
+    @for (promo of promosPuntos; track trackByFn($index, promo)) {
+      <ion-item style="margin-bottom: 15px;" class="promo-item">
+        <ion-img [src]="promo.Imagen" class="promo-img" loading="lazy"></ion-img>
+        <ion-label>
+          <div class="promo-label">{{ promo.Nombre }}</div>
+          <div class="promo-description">{{ promo.Descripcion }}</div>
+          <div class="promo-puntos">{{ promo.PuntosNecesarios }} puntos</div>
+          <ion-button expand="block" (click)="canjearPuntos(promo)" class="canjear-button">Canjear</ion-button>
+        </ion-label>
+      </ion-item>
+    }
   </ion-list>
 </ion-content>
 
@@ -30,10 +32,12 @@
       Volver a Inicio
     </ion-button>
   </ion-toolbar>
-  <ion-toolbar *ngIf="cartItems > 0">
-    <ion-button expand="block" [routerLink]="['/', timestamp, code, 'lista-pedido']">
-      <ion-icon name="cart-outline" slot="start"></ion-icon>
-      Ver Pedido ({{ cartItems }})
-    </ion-button>
-  </ion-toolbar>
+  @if (cartItems > 0) {
+    <ion-toolbar>
+      <ion-button expand="block" [routerLink]="['/', timestamp, code, 'lista-pedido']">
+        <ion-icon name="cart-outline" slot="start"></ion-icon>
+        Ver Pedido ({{ cartItems }})
+      </ion-button>
+    </ion-toolbar>
+  }
 </ion-footer>

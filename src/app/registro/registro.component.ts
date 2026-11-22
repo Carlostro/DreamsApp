@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { TimestampService } from '../services/timestamp.service';
@@ -9,9 +9,11 @@ import { InactivityService } from '../services/inactivity.service';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.scss']
+    selector: 'app-registro',
+    templateUrl: './registro.component.html',
+    styleUrls: ['./registro.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RegistroComponent implements OnInit, OnDestroy {
   nombre: string = '';

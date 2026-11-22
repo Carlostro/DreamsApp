@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from 'src/app/shared/ionic.module';
 
 import { ExploreContainerComponent } from './explore-container.component';
 
